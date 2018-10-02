@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Management;
-using FocusWcfService;
+using FocusWcfService.Common;
 using FocusWcfService.ProcessesHelpers;
 
 namespace FocusWindowsService {
@@ -11,8 +11,11 @@ namespace FocusWindowsService {
 
         private readonly IProcessesListSqlLiteService processesListService;
 
-        public ProcessWatcher(IProcessesListSqlLiteService processesListService) {
+        private readonly IWatchedProcessesCache cache;
+
+        public ProcessWatcher(IProcessesListSqlLiteService processesListService, IWatchedProcessesCache cache) {
             this.processesListService = processesListService;
+            this.cache = cache;
         }
 
         public ManagementEventWatcher WatchForProcessStart() {
@@ -52,10 +55,9 @@ namespace FocusWindowsService {
             var targetInstance = (ManagementBaseObject) e.NewEvent.Properties["TargetInstance"].Value;
             var processName = targetInstance.Properties["Name"].Value?.ToString();
 
-            var processes = this.processesListService.GetCurrentlyWatchedProcesses();
+            var processes = this.cache.GetCachedProcesses();
             if (!string.IsNullOrEmpty(processName) && processes.Any(x => x.Name == processName || processName == $"{x}.exe")) {
-                var process = this.processesListService.GetProcess(processName);
-                this.processesListService.SetProcessAsCurrentlyWatched(process, true);
+                this.processesListService.SetProcessAsCurrentlyWatched(processName, true);
             }
         }
 
@@ -63,10 +65,9 @@ namespace FocusWindowsService {
             var targetInstance = (ManagementBaseObject) e.NewEvent.Properties["TargetInstance"].Value;
             var processName = targetInstance.Properties["Name"].Value?.ToString();
 
-            var processes = this.processesListService.GetCurrentlyWatchedProcesses();
+            var processes = this.cache.GetCachedProcesses();
             if (!string.IsNullOrEmpty(processName) && processes.Any(x => x.Name == processName || processName == $"{x}.exe")) {
-                var process = this.processesListService.GetProcess(processName);
-                this.processesListService.SetProcessAsCurrentlyWatched(process, false);
+                this.processesListService.SetProcessAsCurrentlyWatched(processName, false);
             }
         }
     }

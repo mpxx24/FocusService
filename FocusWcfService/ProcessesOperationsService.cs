@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using FocusWcfService.Common;
 using FocusWcfService.Models;
 using FocusWcfService.ProcessesHelpers;
 
@@ -6,8 +8,11 @@ namespace FocusWcfService {
     public class ProcessesOperationsService : IProcessesOperationsService {
         private readonly IProcessesListSqlLiteService processesListService;
 
-        public ProcessesOperationsService(IProcessesListSqlLiteService processesListService) {
+        private readonly IRepository<WatchedProcess> repository;
+
+        public ProcessesOperationsService(IProcessesListSqlLiteService processesListService, IRepository<WatchedProcess> repository) {
             this.processesListService = processesListService;
+            this.repository = repository;
         }
 
         public bool KillProcess(string name) {
@@ -31,7 +36,7 @@ namespace FocusWcfService {
         }
 
         public void RemoveProcessFromObservedProcessesList(string processName) {
-            var process = new WatchedProcess {Name = processName};
+            var process = this.repository.Filter<WatchedProcess>(x => x.Name == processName).FirstOrDefault();
             this.processesListService.RemoveWatchedProcess(process);
         }
     }

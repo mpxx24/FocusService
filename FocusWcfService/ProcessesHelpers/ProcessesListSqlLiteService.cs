@@ -46,15 +46,15 @@ namespace FocusWcfService.ProcessesHelpers {
             return isProcessAlreadyWatched;
         }
 
-        public void SetProcessAsCurrentlyWatched(WatchedProcess process, bool isCurrentlyWatched) {
-            if (process == null) {
-                throw new InvalidDataException("Process can not be null.");
+        public void SetProcessAsCurrentlyWatched(string procesName, bool isCurrentlyWatched) {
+            if (string.IsNullOrEmpty(procesName)) {
+                throw new InvalidDataException("Process name cannot be null or empty.");
             }
 
-            var dbEntry = this.GetProcess(process.Name);
+            var dbEntry = this.GetProcess(procesName);
 
             if (dbEntry == null) {
-                throw new InvalidDataException($"Process with name: {process.Name} does not exist in the database.");
+                throw new InvalidDataException($"Process with name: {procesName} does not exist in the database.");
             }
 
             dbEntry.IsCurrentlyWatched = isCurrentlyWatched;
@@ -70,6 +70,8 @@ namespace FocusWcfService.ProcessesHelpers {
             process.TimeLeft = process.TimeLeft.Add(TimeSpan.FromMinutes(-1));
             if (process.TimeLeft < new TimeSpan()) {
                 ProcessesHelper.KillProcess(process.Name);
+                process.TimeLeft = new TimeSpan();
+                this.repository.Update(process);
             }
             else {
                 this.repository.Update(process);

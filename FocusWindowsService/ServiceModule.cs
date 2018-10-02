@@ -1,7 +1,5 @@
 ﻿using Autofac;
-using Autofac.Extras.DynamicProxy;
 using FocusWcfService;
-using FocusWcfService.Aspects;
 using FocusWcfService.Common;
 using FocusWcfService.Models;
 using FocusWcfService.ProcessesHelpers;
@@ -16,12 +14,10 @@ namespace FocusWindowsService {
             builder.Register(x => x.Resolve<ISessionFactory>().OpenSession()).As<ISession>();
 
             builder.RegisterType<Repository<WatchedProcess>>().As<IRepository<WatchedProcess>>();
+            builder.RegisterType<WatchedProcessesCache>().As<IWatchedProcessesCache>();
             //builder.RegisterType<ProcessesListFileService>().As<IProcessesListFileService>();
             builder.RegisterType<ProcessesListSqlLiteService>().As<IProcessesListSqlLiteService>();
             builder.RegisterType<ProcessesOperationsService>().As<IProcessesOperationsService>();
-
-            var sessionInterceptor = new SessionInterceptor();
-            builder.RegisterInstance(sessionInterceptor);
         }
     }
 }
