@@ -3,25 +3,57 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Focus"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="On_Window_Loaded">
+        Title="Focus service" Height="450" Width="800" Loaded="On_Window_Loaded">
     <Grid>
-        <ListView HorizontalAlignment="Left" Height="291" Margin="10,69,0,0" VerticalAlignment="Top" Width="772" Name="ProcessesListView" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding listViewSource}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Process Id" DisplayMemberBinding="{Binding Id}" Width="150px"/>
-                    <GridViewColumn Header="Process name" DisplayMemberBinding="{Binding Name}" Width="350px"/>
-                    <GridViewColumn Header="Time allowed per day" DisplayMemberBinding="{Binding TimePerDay}" Width="120px"/>
-                    <!--<GridViewColumn Header="Time left" DisplayMemberBinding="{Binding TimeLeft}" Width="120px"/>-->
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Name="SearchTextBox"/>
-        <Button Content="Search" HorizontalAlignment="Left" Margin="305,24,0,0" VerticalAlignment="Top" Width="75" Height="23" Name="SearchButton" Click="SearchButton_OnClick"/>
-        <Button Content="Kill process" HorizontalAlignment="Left" Margin="707,375,0,0" VerticalAlignment="Top" Width="75" Name="KillProcessButton" Click="KillProcessButton_OnClick"/>
-        <Button Content="Add time limit" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Width="84" Name="AddTimeLimitButton" Click="AddTimeLimitButton_OnClick"/>
-        <Button Content="Remove from the observed processes list" HorizontalAlignment="Left" Margin="118,375,0,0" VerticalAlignment="Top" Width="225" Name="RemoveTimeLimitButton" Click="RemoveTimeLimitButton_OnClick"/>
+        <TabControl>
+            <TabItem Header="All processes">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                    </Grid.RowDefinitions>
 
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="275" />
+                        <ColumnDefinition Width="250" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Center" Width="250" x:Name="SearchTextBox" Grid.Column="0" Grid.Row="0"/>
+                    <Button Content="Search" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="23" Name="SearchButton" Click="SearchButton_OnClick" Grid.Column="1" Grid.Row="0"/>
+
+                    <ListView HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="772" Name="ProcessesListView" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding listViewSource}" Grid.Row="1" Grid.ColumnSpan="4" Grid.Column="0" Grid.RowSpan="3">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Process Id" DisplayMemberBinding="{Binding Id}" Width="150px"/>
+                                <GridViewColumn Header="Process name" DisplayMemberBinding="{Binding Name}" Width="350px"/>
+                                <GridViewColumn Header="Time allowed per day" DisplayMemberBinding="{Binding TimePerDay}" Width="120px"/>
+                                <!--<GridViewColumn Header="Time left" DisplayMemberBinding="{Binding TimeLeft}" Width="120px"/>-->
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Content="Add time limit" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90" Height="23" Name="AddTimeLimitButton" Click="AddTimeLimitButton_OnClick" Grid.Column="1" Grid.Row="0" />
+                        <!-- TODO: move this button to another tab after changes -->
+                        <Button Content="Remove from the observed processes list" HorizontalAlignment="Left" VerticalAlignment="Center" Width="225" Height="23" Name="RemoveTimeLimitButton" Click="RemoveTimeLimitButton_OnClick" Grid.Column="2" Grid.Row="0"/> 
+
+                    </Grid>
+                    <Button Content="Kill process" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Height="23" Name="KillProcessButton" Click="KillProcessButton_OnClick" Grid.Column="3" Grid.Row="3"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Watched processes">
+                <!--TODO-->
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

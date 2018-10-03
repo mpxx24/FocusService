@@ -8,11 +8,14 @@ namespace FocusWcfService {
     public class ProcessesOperationsService : IProcessesOperationsService {
         private readonly IProcessesListSqlLiteService processesListService;
 
+        private readonly IWatchedProcessesCache cache;
+
         private readonly IRepository<WatchedProcess> repository;
 
-        public ProcessesOperationsService(IProcessesListSqlLiteService processesListService, IRepository<WatchedProcess> repository) {
+        public ProcessesOperationsService(IProcessesListSqlLiteService processesListService, IRepository<WatchedProcess> repository, IWatchedProcessesCache cache) {
             this.processesListService = processesListService;
             this.repository = repository;
+            this.cache = cache;
         }
 
         public bool KillProcess(string name) {
@@ -33,11 +36,13 @@ namespace FocusWcfService {
                 LastWatchedDate = DateTime.Today.Date
             };
             this.processesListService.AddWatchedProcess(process);
+            this.cache.RefreshCache();
         }
 
         public void RemoveProcessFromObservedProcessesList(string processName) {
             var process = this.repository.Filter<WatchedProcess>(x => x.Name == processName).FirstOrDefault();
             this.processesListService.RemoveWatchedProcess(process);
+            this.cache.RefreshCache();
         }
     }
 }
