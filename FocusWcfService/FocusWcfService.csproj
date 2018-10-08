@@ -102,6 +102,9 @@
     <Compile Include="Common\Repository.cs" />
     <Compile Include="Common\RepositoryType.cs" />
     <Compile Include="Common\WatchedProcessesCache.cs" />
+    <Compile Include="LocationsHelpers\WatchedLocationActionType.cs" />
+    <Compile Include="Models\WatchedLocation.cs" />
+    <Compile Include="Models\WatchedLocationMap.cs" />
     <Compile Include="Models\WatchedProcess.cs" />
     <Compile Include="Models\WatchedProcessMap.cs" />
     <Compile Include="ProcessesHelpers\IProcessesListFileService.cs" />
