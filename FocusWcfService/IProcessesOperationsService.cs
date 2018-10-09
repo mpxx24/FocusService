@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.ServiceModel;
+using FocusWcfService.Models;
 
 namespace FocusWcfService {
     [ServiceContract(Namespace = "http://FocusProcessesOperations")]
@@ -17,5 +17,8 @@ namespace FocusWcfService {
 
         [OperationContract]
         void RemoveProcessFromObservedProcessesList(string processName);
+
+        [OperationContract]
+        IEnumerable<WatchedProcess> GetAllWatchedProcesses();
     }
 }

@@ -9,7 +9,134 @@
 //------------------------------------------------------------------------------
 
 namespace Focus.FocusService {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="WatchedProcess", Namespace="http://schemas.datacontract.org/2004/07/FocusWcfService.Models")]
+    [System.SerializableAttribute()]
+    public partial class WatchedProcess : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Guid IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsCurrentlyWatchedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime LastWatchedDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.TimeSpan TimeAllowedPerDayField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.TimeSpan TimeLeftField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsCurrentlyWatched {
+            get {
+                return this.IsCurrentlyWatchedField;
+            }
+            set {
+                if ((this.IsCurrentlyWatchedField.Equals(value) != true)) {
+                    this.IsCurrentlyWatchedField = value;
+                    this.RaisePropertyChanged("IsCurrentlyWatched");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime LastWatchedDate {
+            get {
+                return this.LastWatchedDateField;
+            }
+            set {
+                if ((this.LastWatchedDateField.Equals(value) != true)) {
+                    this.LastWatchedDateField = value;
+                    this.RaisePropertyChanged("LastWatchedDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.TimeSpan TimeAllowedPerDay {
+            get {
+                return this.TimeAllowedPerDayField;
+            }
+            set {
+                if ((this.TimeAllowedPerDayField.Equals(value) != true)) {
+                    this.TimeAllowedPerDayField = value;
+                    this.RaisePropertyChanged("TimeAllowedPerDay");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.TimeSpan TimeLeft {
+            get {
+                return this.TimeLeftField;
+            }
+            set {
+                if ((this.TimeLeftField.Equals(value) != true)) {
+                    this.TimeLeftField = value;
+                    this.RaisePropertyChanged("TimeLeft");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://FocusProcessesOperations", ConfigurationName="FocusService.IProcessesOperationsService")]
@@ -40,6 +167,16 @@ namespace Focus.FocusService {
             "rvedProcessesList", ReplyAction="http://FocusProcessesOperations/IProcessesOperationsService/RemoveProcessFromObse" +
             "rvedProcessesListResponse")]
         System.Threading.Tasks.Task RemoveProcessFromObservedProcessesListAsync(string processName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcesse" +
+            "s", ReplyAction="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcesse" +
+            "sResponse")]
+        Focus.FocusService.WatchedProcess[] GetAllWatchedProcesses();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcesse" +
+            "s", ReplyAction="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcesse" +
+            "sResponse")]
+        System.Threading.Tasks.Task<Focus.FocusService.WatchedProcess[]> GetAllWatchedProcessesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -91,6 +228,14 @@ namespace Focus.FocusService {
         
         public System.Threading.Tasks.Task RemoveProcessFromObservedProcessesListAsync(string processName) {
             return base.Channel.RemoveProcessFromObservedProcessesListAsync(processName);
+        }
+        
+        public Focus.FocusService.WatchedProcess[] GetAllWatchedProcesses() {
+            return base.Channel.GetAllWatchedProcesses();
+        }
+        
+        public System.Threading.Tasks.Task<Focus.FocusService.WatchedProcess[]> GetAllWatchedProcessesAsync() {
+            return base.Channel.GetAllWatchedProcessesAsync();
         }
     }
 }

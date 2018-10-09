@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FocusWcfService.Common;
 using FocusWcfService.Models;
@@ -43,6 +44,11 @@ namespace FocusWcfService {
             var process = this.repository.Filter<WatchedProcess>(x => x.Name == processName).FirstOrDefault();
             this.processesListService.RemoveWatchedProcess(process);
             this.cache.RefreshCache();
+        }
+
+        public IEnumerable<WatchedProcess> GetAllWatchedProcesses() {
+            var processes = this.processesListService.GetCurrentlyWatchedProcesses();
+            return processes;
         }
     }
 }

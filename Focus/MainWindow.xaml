@@ -72,10 +72,9 @@
                     <ListView HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="772" Name="ProcessesWatchedListView" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding listViewWatchedSource}" Grid.Row="1" Grid.ColumnSpan="6" Grid.Column="0" Grid.RowSpan="2">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Process Id" DisplayMemberBinding="{Binding WatchedId}" Width="150px"/>
-                                <GridViewColumn Header="Process name" DisplayMemberBinding="{Binding WatchedName}" Width="350px"/>
-                                <GridViewColumn Header="Time allowed per day" DisplayMemberBinding="{Binding WatchedTimePerDay}" Width="120px"/>
-                                <!--<GridViewColumn Header="Time left" DisplayMemberBinding="{Binding TimeLeft}" Width="120px"/>-->
+                                <GridViewColumn Header="Process name" DisplayMemberBinding="{Binding Name}" Width="350px"/>
+                                <GridViewColumn Header="Time allowed per day" DisplayMemberBinding="{Binding TimePerDay}" Width="120px"/>
+                                <GridViewColumn Header="Time left" DisplayMemberBinding="{Binding TimeLeftToday}" Width="120px"/>
                             </GridView>
                         </ListView.View>
                     </ListView>

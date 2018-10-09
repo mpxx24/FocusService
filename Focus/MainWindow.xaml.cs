@@ -103,5 +103,26 @@ namespace Focus {
         private ProcessModel GetCurrentlySelectedItem() {
             return (ProcessModel) this.ProcessesListView.SelectedItem;
         }
+
+        private IEnumerable<WatchedProcessModel> GetWatchedProcesses() {
+            try {
+                if (this.client.InnerChannel.State != CommunicationState.Faulted) {
+                    var processes = this.client.GetAllWatchedProcesses();
+
+                    return processes.Select(x => new WatchedProcessModel {
+                        Name = x.Name,
+                        TimePerDay = x.TimeAllowedPerDay.ToString(),
+                        TimeLeftToday = x.TimeLeft.ToString()
+                    });
+                }
+
+                this.client = new ProcessesOperationsServiceClient();
+                return this.GetWatchedProcesses();
+            }
+            catch (EndpointNotFoundException) {
+                MessageBox.Show($"Could not get watched processes list. Windows service 'FocusHostService' is most likely not running.");
+            }
+            return new List<WatchedProcessModel>();
+        }
     }
 }

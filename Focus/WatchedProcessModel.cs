@@ -1,19 +1,14 @@
 ﻿using System;
 
 namespace Focus {
-    public class ProcessModel {
+    public class WatchedProcessModel {
         private readonly TimeSpan maxTimeSpan = new TimeSpan(24, 0, 0);
-
-        private int id { get; set; }
 
         private string name { get; set; }
 
         private TimeSpan timePerDay { get; set; }
 
-        public int Id {
-            get => this.id;
-            set => this.id = value;
-        }
+        private TimeSpan timeLeftToday { get; set; }
 
         public string Name {
             get => this.name;
@@ -31,6 +26,21 @@ namespace Focus {
                 }
                 else {
                     this.timePerDay = new TimeSpan();
+                }
+            }
+        }
+
+        public string TimeLeftToday {
+            get => this.timePerDay == new TimeSpan(0, 0, 0) ? "-" : this.timeLeftToday.ToString("g");
+            set {
+                if (TimeSpan.TryParse(value, out var valueAsTimespan)) {
+                    var timeSpan = valueAsTimespan > this.maxTimeSpan
+                        ? this.maxTimeSpan
+                        : valueAsTimespan;
+                    this.timeLeftToday = timeSpan;
+                }
+                else {
+                    this.timeLeftToday = new TimeSpan();
                 }
             }
         }

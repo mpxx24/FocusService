@@ -67,6 +67,13 @@ namespace FocusWcfService.ProcessesHelpers {
                 throw new InvalidDataException("Process can not be null.");
             }
 
+            if (DateTime.Now.Date != process.LastWatchedDate) {
+                process.LastWatchedDate = DateTime.Now.Date;
+                process.TimeLeft = process.TimeAllowedPerDay;
+                this.repository.Update(process);
+                return;
+            }
+
             process.TimeLeft = process.TimeLeft.Add(TimeSpan.FromMinutes(-1));
             if (process.TimeLeft < new TimeSpan()) {
                 ProcessesHelper.KillProcess(process.Name);

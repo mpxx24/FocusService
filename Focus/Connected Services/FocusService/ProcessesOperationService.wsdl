@@ -4,6 +4,7 @@
     <xsd:schema targetNamespace="http://FocusProcessesOperations/Imports">
       <xsd:import schemaLocation="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd0" namespace="http://FocusProcessesOperations" />
       <xsd:import schemaLocation="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/FocusWcfService.Models" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IProcessesOperationsService_KillProcess_InputMessage">
@@ -24,6 +25,12 @@
   <wsdl:message name="IProcessesOperationsService_RemoveProcessFromObservedProcessesList_OutputMessage">
     <wsdl:part name="parameters" element="tns:RemoveProcessFromObservedProcessesListResponse" />
   </wsdl:message>
+  <wsdl:message name="IProcessesOperationsService_GetAllWatchedProcesses_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllWatchedProcesses" />
+  </wsdl:message>
+  <wsdl:message name="IProcessesOperationsService_GetAllWatchedProcesses_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllWatchedProcessesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IProcessesOperationsService">
     <wsdl:operation name="KillProcess">
       <wsdl:input wsaw:Action="http://FocusProcessesOperations/IProcessesOperationsService/KillProcess" message="tns:IProcessesOperationsService_KillProcess_InputMessage" />
@@ -36,6 +43,10 @@
     <wsdl:operation name="RemoveProcessFromObservedProcessesList">
       <wsdl:input wsaw:Action="http://FocusProcessesOperations/IProcessesOperationsService/RemoveProcessFromObservedProcessesList" message="tns:IProcessesOperationsService_RemoveProcessFromObservedProcessesList_InputMessage" />
       <wsdl:output wsaw:Action="http://FocusProcessesOperations/IProcessesOperationsService/RemoveProcessFromObservedProcessesListResponse" message="tns:IProcessesOperationsService_RemoveProcessFromObservedProcessesList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllWatchedProcesses">
+      <wsdl:input wsaw:Action="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcesses" message="tns:IProcessesOperationsService_GetAllWatchedProcesses_InputMessage" />
+      <wsdl:output wsaw:Action="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcessesResponse" message="tns:IProcessesOperationsService_GetAllWatchedProcesses_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>
