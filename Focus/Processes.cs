@@ -13,8 +13,7 @@ namespace Focus {
         private ProcessModel ConvertToProcessViewModel(Process process) {
             var dto = new ProcessModel {
                 Id = process.Id,
-                Name = process.ProcessName,
-                TimePerDay = "-"
+                Name = process.ProcessName
             };
 
             return dto;

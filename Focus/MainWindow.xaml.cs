@@ -5,14 +5,13 @@ using System.Linq;
 using System.ServiceModel;
 using System.Windows;
 using Focus.FocusService;
+using Focus.Views;
 
 namespace Focus {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow {
-        private readonly TimeSpan testTimeSpan = new TimeSpan(0, 30, 0);
-
         private ProcessesOperationsServiceClient client;
 
         public MainWindow() {
@@ -25,12 +24,11 @@ namespace Focus {
         }
 
         private IEnumerable<ProcessModel> GetProcessList() {
-            var processes = Process.GetProcesses(); //this.client.GetAllRunningProcesses();
+            var processes = Process.GetProcesses();
 
             return new List<ProcessModel>(processes.Select(x => new ProcessModel {
                 Id = x.Id,
-                Name = x.ProcessName,
-                TimePerDay = this.testTimeSpan.ToString("g")
+                Name = x.ProcessName
             }));
         }
 
@@ -66,13 +64,21 @@ namespace Focus {
 
         private void FullyRefreshProcessesListView() {
             this.ProcessesListView.ItemsSource = this.GetProcessList().OrderBy(x => x.Name);
+            this.ProcessesWatchedListView.ItemsSource = this.GetWatchedProcesses().OrderBy(x => x.Name);
         }
 
         private void AddTimeLimitButton_OnClick(object sender, RoutedEventArgs e) {
+            var timeSpanToSet = new TimeSpan();
+            var allowedTimeDialog = new AllowedTimeDialog();
+
+            if (allowedTimeDialog.ShowDialog() == true) {
+                timeSpanToSet = allowedTimeDialog.AllowedTimePerDay;
+            }
+
             var selectedItem = this.GetCurrentlySelectedItem();
             try {
                 if (this.client.InnerChannel.State != CommunicationState.Faulted) {
-                    this.client.AddProcessToObservedProcessesList(selectedItem.Name, this.testTimeSpan);
+                    this.client.AddProcessToObservedProcessesList(selectedItem.Name, timeSpanToSet);
                 }
                 else {
                     this.client = new ProcessesOperationsServiceClient();
