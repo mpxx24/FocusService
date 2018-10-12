@@ -12,7 +12,6 @@
                 <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -22,8 +21,8 @@
             </Grid.ColumnDefinitions>
             
             <TextBlock Text="Time allowed per day" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-            <TextBox x:Name="TimeAllowedTextBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100px"/>
-            <Button Content="OK" Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="OKButton_Click"  Width="50px"/>
+            <TextBox x:Name="TimeAllowedTextBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100px"/>
+            <Button Content="OK" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="OKButton_Click"  Width="50px"/>
         </Grid>
     </Grid>
 </Window>

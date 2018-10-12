@@ -20,5 +20,8 @@ namespace FocusWcfService {
 
         [OperationContract]
         IEnumerable<WatchedProcess> GetAllWatchedProcesses();
+
+        [OperationContract]
+        void UpdateProcessInObservedProcessesList(string processName, TimeSpan allowedTime);
     }
 }

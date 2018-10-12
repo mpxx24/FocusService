@@ -53,7 +53,7 @@ namespace FocusWindowsService {
             var processes = this.processesListService.GetCurrentlyWatchedProcesses().ToList();
 
             foreach (var watchedProcess in processes) {
-                this.processesListService.UpdateTimeForWatchedProcess(watchedProcess);
+                this.processesListService.UpdateTimeForWatchedProcess(watchedProcess.Name);
             }
 
             this.watchedProcessesCache.UpdateCache(processes);

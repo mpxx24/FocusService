@@ -21,17 +21,24 @@ namespace FocusWcfService.ProcessesHelpers {
             return this.repository.Filter<WatchedProcess>(x => x.IsCurrentlyWatched);
         }
 
-        public void AddWatchedProcess(WatchedProcess process) {
-            if (process == null) {
-                throw new InvalidDataException("Process can not be null.");
-            }
+        public void AddWatchedProcess(string processName, TimeSpan allowedTime) {
+            var process = new WatchedProcess {
+                Id = Guid.NewGuid(),
+                Name = processName,
+                TimeAllowedPerDay = allowedTime,
+                TimeLeft = allowedTime,
+                IsCurrentlyWatched = true,
+                LastWatchedDate = DateTime.Today.Date
+            };
 
             this.repository.Save(process);
         }
 
-        public void RemoveWatchedProcess(WatchedProcess process) {
+        public void RemoveWatchedProcess(string processName) {
+            var process = this.repository.Filter<WatchedProcess>(x => x.Name == processName).FirstOrDefault();
+
             if (process == null) {
-                throw new InvalidDataException("Process can not be null.");
+                throw new InvalidDataException("Process does not exist in the database!");
             }
 
             this.repository.Delete(process);
@@ -62,9 +69,23 @@ namespace FocusWcfService.ProcessesHelpers {
             this.repository.Update(dbEntry);
         }
 
-        public void UpdateTimeForWatchedProcess(WatchedProcess process) {
+        public void ChangeAllowedTimeForWatchedProcess(string processName, TimeSpan allowedTime) {
+            var process = this.repository.Filter<WatchedProcess>(x => x.Name == processName).FirstOrDefault();
+
             if (process == null) {
-                throw new InvalidDataException("Process can not be null.");
+                throw new InvalidDataException("Process does not exist in the database!");
+            }
+
+            process.TimeAllowedPerDay = allowedTime;
+            process.TimeLeft = allowedTime;
+            this.repository.Update(process);
+        }
+
+        public void UpdateTimeForWatchedProcess(string processName) {
+            var process = this.repository.Filter<WatchedProcess>(x => x.Name == processName).FirstOrDefault();
+
+            if (process == null) {
+                throw new InvalidDataException("Process does not exist in the database!");
             }
 
             if (DateTime.Now.Date != process.LastWatchedDate) {

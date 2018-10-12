@@ -20,7 +20,7 @@ namespace Focus {
         }
 
         private void On_Window_Loaded(object sender, RoutedEventArgs e) {
-            this.FullyRefreshProcessesListView();
+            this.FullyRefreshProcessesListViews();
         }
 
         private IEnumerable<ProcessModel> GetProcessList() {
@@ -58,12 +58,19 @@ namespace Focus {
                 MessageBox.Show($"Could not kill selected process [{selectedItem.Name}]. Windows service 'FocusHostService' is most likely not running.");
             }
             finally {
-                this.FullyRefreshProcessesListView();
+                this.FullyRefreshProcessesListViews();
             }
         }
 
-        private void FullyRefreshProcessesListView() {
+        private void FullyRefreshProcessesListViews() {
+            this.RefreshProcessesListView();
+            this.RefreshWatchedProcessesListView();
+        }
+
+        private void RefreshProcessesListView() {
             this.ProcessesListView.ItemsSource = this.GetProcessList().OrderBy(x => x.Name);
+        }
+        private void RefreshWatchedProcessesListView() {
             this.ProcessesWatchedListView.ItemsSource = this.GetWatchedProcesses().OrderBy(x => x.Name);
         }
 
@@ -79,6 +86,31 @@ namespace Focus {
             try {
                 if (this.client.InnerChannel.State != CommunicationState.Faulted) {
                     this.client.AddProcessToObservedProcessesList(selectedItem.Name, timeSpanToSet);
+                    this.RefreshWatchedProcessesListView();
+                }
+                else {
+                    this.client = new ProcessesOperationsServiceClient();
+                    this.AddTimeLimitButton_OnClick(sender, e);
+                }
+            }
+            catch (EndpointNotFoundException) {
+                MessageBox.Show($"Could not add process [{selectedItem.Name}] to observed. Windows service 'FocusHostService' is most likely not running.");
+            }
+        }
+
+        private void ChangeTimeLimitButton_OnClick(object sender, RoutedEventArgs e) {
+            var timeSpanToSet = new TimeSpan();
+            var allowedTimeDialog = new AllowedTimeDialog();
+
+            if (allowedTimeDialog.ShowDialog() == true) {
+                timeSpanToSet = allowedTimeDialog.AllowedTimePerDay;
+            }
+
+            var selectedItem = this.GetCurrentlySelectedWatchedItem();
+            try {
+                if (this.client.InnerChannel.State != CommunicationState.Faulted) {
+                    this.client.UpdateProcessInObservedProcessesList(selectedItem.Name, timeSpanToSet);
+                    this.RefreshWatchedProcessesListView();
                 }
                 else {
                     this.client = new ProcessesOperationsServiceClient();
@@ -91,10 +123,11 @@ namespace Focus {
         }
 
         private void RemoveTimeLimitButton_OnClick(object sender, RoutedEventArgs e) {
-            var selectedItem = this.GetCurrentlySelectedItem();
+            var selectedItem = this.GetCurrentlySelectedWatchedItem();
             try {
                 if (this.client.InnerChannel.State != CommunicationState.Faulted) {
                     this.client.RemoveProcessFromObservedProcessesList(selectedItem.Name);
+                    this.RefreshWatchedProcessesListView();
                 }
                 else {
                     this.client = new ProcessesOperationsServiceClient();
@@ -108,6 +141,10 @@ namespace Focus {
 
         private ProcessModel GetCurrentlySelectedItem() {
             return (ProcessModel) this.ProcessesListView.SelectedItem;
+        }
+
+        private WatchedProcessModel GetCurrentlySelectedWatchedItem() {
+            return (WatchedProcessModel) this.ProcessesWatchedListView.SelectedItem;
         }
 
         private IEnumerable<WatchedProcessModel> GetWatchedProcesses() {
@@ -129,6 +166,10 @@ namespace Focus {
                 MessageBox.Show($"Could not get watched processes list. Windows service 'FocusHostService' is most likely not running.");
             }
             return new List<WatchedProcessModel>();
+        }
+
+        private void RefreshWatchedProcessesListButton_OnClick(object sender, RoutedEventArgs e) {
+            this.RefreshWatchedProcessesListView();
         }
     }
 }

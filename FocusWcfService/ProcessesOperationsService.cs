@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using FocusWcfService.Common;
 using FocusWcfService.Models;
 using FocusWcfService.ProcessesHelpers;
@@ -10,12 +9,9 @@ namespace FocusWcfService {
         private readonly IProcessesListSqlLiteService processesListService;
 
         private readonly IWatchedProcessesCache cache;
-
-        private readonly IRepository<WatchedProcess> repository;
-
-        public ProcessesOperationsService(IProcessesListSqlLiteService processesListService, IRepository<WatchedProcess> repository, IWatchedProcessesCache cache) {
+        
+        public ProcessesOperationsService(IProcessesListSqlLiteService processesListService, IWatchedProcessesCache cache) {
             this.processesListService = processesListService;
-            this.repository = repository;
             this.cache = cache;
         }
 
@@ -28,27 +24,22 @@ namespace FocusWcfService {
         //}
 
         public void AddProcessToObservedProcessesList(string processName, TimeSpan allowedTime) {
-            var process = new WatchedProcess {
-                Id = Guid.NewGuid(),
-                Name = processName,
-                TimeAllowedPerDay = allowedTime,
-                TimeLeft = allowedTime,
-                IsCurrentlyWatched = true,
-                LastWatchedDate = DateTime.Today.Date
-            };
-            this.processesListService.AddWatchedProcess(process);
+            this.processesListService.AddWatchedProcess(processName, allowedTime);
             this.cache.RefreshCache();
         }
 
         public void RemoveProcessFromObservedProcessesList(string processName) {
-            var process = this.repository.Filter<WatchedProcess>(x => x.Name == processName).FirstOrDefault();
-            this.processesListService.RemoveWatchedProcess(process);
+            this.processesListService.RemoveWatchedProcess(processName);
             this.cache.RefreshCache();
         }
 
         public IEnumerable<WatchedProcess> GetAllWatchedProcesses() {
             var processes = this.processesListService.GetCurrentlyWatchedProcesses();
             return processes;
+        }
+
+        public void UpdateProcessInObservedProcessesList(string processName, TimeSpan allowedTime) {
+            this.processesListService.ChangeAllowedTimeForWatchedProcess(processName, allowedTime);
         }
     }
 }

@@ -110,7 +110,6 @@
     <Compile Include="ProcessesHelpers\IProcessesListFileService.cs" />
     <Compile Include="ProcessesHelpers\IProcessesListService.cs" />
     <Compile Include="ProcessesHelpers\IProcessesListSqlLiteService.cs" />
-    <Compile Include="ProcessesHelpers\ProcessesListFileService.cs" />
     <Compile Include="ProcessesHelpers\ProcessesHelper.cs" />
     <Compile Include="ProcessesHelpers\ProcessesListSqlLiteService.cs" />
     <Compile Include="ProcessesOperationsService.cs" />

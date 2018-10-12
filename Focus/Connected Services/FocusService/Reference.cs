@@ -177,6 +177,16 @@ namespace Focus.FocusService {
             "s", ReplyAction="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcesse" +
             "sResponse")]
         System.Threading.Tasks.Task<Focus.FocusService.WatchedProcess[]> GetAllWatchedProcessesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://FocusProcessesOperations/IProcessesOperationsService/UpdateProcessInObserv" +
+            "edProcessesList", ReplyAction="http://FocusProcessesOperations/IProcessesOperationsService/UpdateProcessInObserv" +
+            "edProcessesListResponse")]
+        void UpdateProcessInObservedProcessesList(string processName, System.TimeSpan allowedTime);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://FocusProcessesOperations/IProcessesOperationsService/UpdateProcessInObserv" +
+            "edProcessesList", ReplyAction="http://FocusProcessesOperations/IProcessesOperationsService/UpdateProcessInObserv" +
+            "edProcessesListResponse")]
+        System.Threading.Tasks.Task UpdateProcessInObservedProcessesListAsync(string processName, System.TimeSpan allowedTime);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -236,6 +246,14 @@ namespace Focus.FocusService {
         
         public System.Threading.Tasks.Task<Focus.FocusService.WatchedProcess[]> GetAllWatchedProcessesAsync() {
             return base.Channel.GetAllWatchedProcessesAsync();
+        }
+        
+        public void UpdateProcessInObservedProcessesList(string processName, System.TimeSpan allowedTime) {
+            base.Channel.UpdateProcessInObservedProcessesList(processName, allowedTime);
+        }
+        
+        public System.Threading.Tasks.Task UpdateProcessInObservedProcessesListAsync(string processName, System.TimeSpan allowedTime) {
+            return base.Channel.UpdateProcessInObservedProcessesListAsync(processName, allowedTime);
         }
     }
 }

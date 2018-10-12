@@ -31,6 +31,12 @@
   <wsdl:message name="IProcessesOperationsService_GetAllWatchedProcesses_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllWatchedProcessesResponse" />
   </wsdl:message>
+  <wsdl:message name="IProcessesOperationsService_UpdateProcessInObservedProcessesList_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProcessInObservedProcessesList" />
+  </wsdl:message>
+  <wsdl:message name="IProcessesOperationsService_UpdateProcessInObservedProcessesList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateProcessInObservedProcessesListResponse" />
+  </wsdl:message>
   <wsdl:portType name="IProcessesOperationsService">
     <wsdl:operation name="KillProcess">
       <wsdl:input wsaw:Action="http://FocusProcessesOperations/IProcessesOperationsService/KillProcess" message="tns:IProcessesOperationsService_KillProcess_InputMessage" />
@@ -47,6 +53,10 @@
     <wsdl:operation name="GetAllWatchedProcesses">
       <wsdl:input wsaw:Action="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcesses" message="tns:IProcessesOperationsService_GetAllWatchedProcesses_InputMessage" />
       <wsdl:output wsaw:Action="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcessesResponse" message="tns:IProcessesOperationsService_GetAllWatchedProcesses_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProcessInObservedProcessesList">
+      <wsdl:input wsaw:Action="http://FocusProcessesOperations/IProcessesOperationsService/UpdateProcessInObservedProcessesList" message="tns:IProcessesOperationsService_UpdateProcessInObservedProcessesList_InputMessage" />
+      <wsdl:output wsaw:Action="http://FocusProcessesOperations/IProcessesOperationsService/UpdateProcessInObservedProcessesListResponse" message="tns:IProcessesOperationsService_UpdateProcessInObservedProcessesList_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>
