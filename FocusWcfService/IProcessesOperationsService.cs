@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using FocusWcfService.Dtos;
 using FocusWcfService.Models;
 
 namespace FocusWcfService {
@@ -19,7 +20,7 @@ namespace FocusWcfService {
         void RemoveProcessFromObservedProcessesList(string processName);
 
         [OperationContract]
-        IEnumerable<WatchedProcess> GetAllWatchedProcesses();
+        IEnumerable<WatchedProcessDto> GetAllWatchedProcesses();
 
         [OperationContract]
         void UpdateProcessInObservedProcessesList(string processName, TimeSpan allowedTime);

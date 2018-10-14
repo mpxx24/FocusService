@@ -26,7 +26,7 @@ namespace Focus.FocusService {
         private System.Guid IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsCurrentlyWatchedField;
+        private bool IsRunningField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime LastWatchedDateField;
@@ -64,14 +64,14 @@ namespace Focus.FocusService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsCurrentlyWatched {
+        public bool IsRunning {
             get {
-                return this.IsCurrentlyWatchedField;
+                return this.IsRunningField;
             }
             set {
-                if ((this.IsCurrentlyWatchedField.Equals(value) != true)) {
-                    this.IsCurrentlyWatchedField = value;
-                    this.RaisePropertyChanged("IsCurrentlyWatched");
+                if ((this.IsRunningField.Equals(value) != true)) {
+                    this.IsRunningField = value;
+                    this.RaisePropertyChanged("IsRunning");
                 }
             }
         }

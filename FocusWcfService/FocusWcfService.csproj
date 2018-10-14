@@ -97,18 +97,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\IRepository.cs" />
-    <Compile Include="Common\IWatchedProcessesCache.cs" />
     <Compile Include="Common\NHibernateHelper.cs" />
     <Compile Include="Common\Repository.cs" />
-    <Compile Include="Common\RepositoryType.cs" />
-    <Compile Include="Common\WatchedProcessesCache.cs" />
+    <Compile Include="Dtos\WatchedProcessDto.cs" />
     <Compile Include="LocationsHelpers\WatchedLocationActionType.cs" />
     <Compile Include="Models\WatchedLocation.cs" />
     <Compile Include="Models\WatchedLocationMap.cs" />
     <Compile Include="Models\WatchedProcess.cs" />
     <Compile Include="Models\WatchedProcessMap.cs" />
-    <Compile Include="ProcessesHelpers\IProcessesListFileService.cs" />
-    <Compile Include="ProcessesHelpers\IProcessesListService.cs" />
     <Compile Include="ProcessesHelpers\IProcessesListSqlLiteService.cs" />
     <Compile Include="ProcessesHelpers\ProcessesHelper.cs" />
     <Compile Include="ProcessesHelpers\ProcessesListSqlLiteService.cs" />

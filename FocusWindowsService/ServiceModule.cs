@@ -14,8 +14,6 @@ namespace FocusWindowsService {
             builder.Register(x => x.Resolve<ISessionFactory>().OpenSession()).As<ISession>();
 
             builder.RegisterType<Repository<WatchedProcess>>().As<IRepository<WatchedProcess>>();
-            builder.RegisterType<WatchedProcessesCache>().As<IWatchedProcessesCache>();
-            //builder.RegisterType<ProcessesListFileService>().As<IProcessesListFileService>();
             builder.RegisterType<ProcessesListSqlLiteService>().As<IProcessesListSqlLiteService>();
             builder.RegisterType<ProcessesOperationsService>().As<IProcessesOperationsService>();
         }

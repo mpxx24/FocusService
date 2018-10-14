@@ -16,15 +16,11 @@ namespace FocusWindowsService {
 
         private readonly IProcessesOperationsService processesOperationsService;
 
-        private readonly IWatchedProcessesCache watchedProcessesCache;
-
         private ServiceHost serviceHost;
 
-
-        public FocusHostService(IProcessesListSqlLiteService processesListService, IProcessesOperationsService processesOperationsService, IWatchedProcessesCache watchedProcessesCache) {
+        public FocusHostService(IProcessesListSqlLiteService processesListService, IProcessesOperationsService processesOperationsService) {
             this.processesListService = processesListService;
             this.processesOperationsService = processesOperationsService;
-            this.watchedProcessesCache = watchedProcessesCache;
 
             this.InitializeComponent();
         }
@@ -39,8 +35,6 @@ namespace FocusWindowsService {
             this.serviceHost.Open();
 
             this.StartWatcherTimer();
-
-            this.StartWatchingForProcessesFromTheList();
         }
 
         private void StartWatcherTimer() {
@@ -50,13 +44,11 @@ namespace FocusWindowsService {
         }
 
         private void OnTimerTick(object sender, ElapsedEventArgs e) {
-            var processes = this.processesListService.GetCurrentlyWatchedProcesses().ToList();
+            var processes = this.processesListService.GetCurrentlyRunningWatchedProcesses().ToList();
 
             foreach (var watchedProcess in processes) {
                 this.processesListService.UpdateTimeForWatchedProcess(watchedProcess.Name);
             }
-
-            this.watchedProcessesCache.UpdateCache(processes);
         }
 
         protected override void OnStop() {
@@ -65,28 +57,5 @@ namespace FocusWindowsService {
                 this.serviceHost = null;
             }
         }
-
-        private void StartWatchingForProcessesFromTheList() {
-            var processWatcher = new ProcessWatcher(this.processesListService, this.watchedProcessesCache);
-            processWatcher.WatchForProcessStart();
-            processWatcher.WatchForProcessEnd();
-        }
-
-        //private void StartWatchingForProcessesFromTheList() {
-        //    InitialListToWatch = this.processesListService.GetCurrentlyWatchedProcesses().ToList();
-
-        //    var alreadyRunningProcessesFromList = Process.GetProcesses()
-        //                                                 .Where(x => InitialListToWatch.Any(y => x.ProcessName == y))
-        //                                                 .ToList()
-        //                                                 .Distinct();
-
-        //    foreach (var process in alreadyRunningProcessesFromList) {
-        //        //remove the extension, lol
-        //        WatchedProcesses.Add(Path.GetFileName(process.ProcessName));
-        //    }
-
-        //    ProcessWatcher.WatchForProcessStart();
-        //    ProcessWatcher.WatchForProcessEnd();
-        //}
     }
 }

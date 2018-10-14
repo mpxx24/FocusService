@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FocusWcfService.Common;
+using FocusWcfService.Dtos;
 using FocusWcfService.Models;
 
 namespace FocusWcfService.ProcessesHelpers {
@@ -14,20 +15,33 @@ namespace FocusWcfService.ProcessesHelpers {
         }
 
         public WatchedProcess GetProcess(string name) {
-            return this.repository.Get(name);
+            return this.repository.Filter<WatchedProcess>(x => x.Name == name).FirstOrDefault();
         }
 
-        public IEnumerable<WatchedProcess> GetCurrentlyWatchedProcesses() {
-            return this.repository.Filter<WatchedProcess>(x => x.IsCurrentlyWatched);
+        public IEnumerable<WatchedProcessDto> GetCurrentlyRunningWatchedProcesses() {
+            var watchedProcesses = this.repository.GetAll();
+
+            return this.MapWatchedProcessToDtos(watchedProcesses);
+        }
+
+        public IEnumerable<WatchedProcessDto> GetAllWatchedProcesses() {
+            var allProcesses = this.repository.GetAll();
+            return this.MapWatchedProcessToDtos(allProcesses);
         }
 
         public void AddWatchedProcess(string processName, TimeSpan allowedTime) {
+            var isProcessAlreadyWatched = this.IsProcessWithTheSameNameAlreadyWatched(processName);
+
+            if (isProcessAlreadyWatched.HasValue && isProcessAlreadyWatched.Value) {
+                this.ChangeAllowedTimeForWatchedProcess(processName, allowedTime);
+                return;
+            }
+
             var process = new WatchedProcess {
                 Id = Guid.NewGuid(),
                 Name = processName,
                 TimeAllowedPerDay = allowedTime,
                 TimeLeft = allowedTime,
-                IsCurrentlyWatched = true,
                 LastWatchedDate = DateTime.Today.Date
             };
 
@@ -53,7 +67,7 @@ namespace FocusWcfService.ProcessesHelpers {
             return isProcessAlreadyWatched;
         }
 
-        public void SetProcessAsCurrentlyWatched(string procesName, bool isCurrentlyWatched) {
+        public void SetProcessAsCurrentlyWatchedAsync(string procesName, bool isCurrentlyWatched) {
             if (string.IsNullOrEmpty(procesName)) {
                 throw new InvalidDataException("Process name cannot be null or empty.");
             }
@@ -64,7 +78,7 @@ namespace FocusWcfService.ProcessesHelpers {
                 throw new InvalidDataException($"Process with name: {procesName} does not exist in the database.");
             }
 
-            dbEntry.IsCurrentlyWatched = isCurrentlyWatched;
+            //dbEntry.IsRunning = isCurrentlyWatched;
             dbEntry.LastWatchedDate = DateTime.Today.Date;
             this.repository.Update(dbEntry);
         }
@@ -82,6 +96,10 @@ namespace FocusWcfService.ProcessesHelpers {
         }
 
         public void UpdateTimeForWatchedProcess(string processName) {
+            if (!ProcessesHelper.IsProcessRunning(processName)) {
+                return;
+            }
+
             var process = this.repository.Filter<WatchedProcess>(x => x.Name == processName).FirstOrDefault();
 
             if (process == null) {
@@ -104,6 +122,21 @@ namespace FocusWcfService.ProcessesHelpers {
             else {
                 this.repository.Update(process);
             }
+        }
+        
+        private IEnumerable<WatchedProcessDto> MapWatchedProcessToDtos(IEnumerable<WatchedProcess> watchedProcesses) {
+            return watchedProcesses.Select(MapWatchedProcessToDto);
+        }
+
+        public static WatchedProcessDto MapWatchedProcessToDto(WatchedProcess watchedProcess) {
+            return new WatchedProcessDto {
+                Id = watchedProcess.Id,
+                Name = watchedProcess.Name,
+                TimeAllowedPerDay = watchedProcess.TimeAllowedPerDay,
+                TimeLeft = watchedProcess.TimeLeft,
+                LastWatchedDate = watchedProcess.LastWatchedDate,
+                IsCurrentlyRunning = ProcessesHelper.IsProcessRunning(watchedProcess.Name)
+            };
         }
     }
 }

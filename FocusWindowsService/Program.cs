@@ -15,10 +15,9 @@ namespace FocusWindowsService {
             IoC.Initialize(new Module[] {new ServiceModule()});
             var processesListSqlLiteService = IoC.Resolve<IProcessesListSqlLiteService>();
             var processesOperationsService = IoC.Resolve<IProcessesOperationsService>();
-            var cache = IoC.Resolve<IWatchedProcessesCache>();
 
             var servicesToRun = new ServiceBase[] {
-                new FocusHostService(processesListSqlLiteService, processesOperationsService, cache)
+                new FocusHostService(processesListSqlLiteService, processesOperationsService)
             };
             ServiceBase.Run(servicesToRun);
         }

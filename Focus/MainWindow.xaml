@@ -13,7 +13,7 @@
                         <RowDefinition Height="50" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="50" />
-                        <RowDefinition Height="50" />
+                        <RowDefinition Height="40" />
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -44,7 +44,7 @@
 
                         <Button Content="Add time limit" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="23" Name="AddTimeLimitButton" Click="AddTimeLimitButton_OnClick" Grid.Column="1" Grid.Row="0" />
                     </Grid>
-                    <Button Content="Kill process" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Height="24" Name="KillProcessButton" Click="KillProcessButton_OnClick" Grid.Column="4" Grid.Row="3" Margin="28,13"/>
+                    <Button Content="Kill process" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Height="24" Name="KillProcessButton" Click="KillProcessButton_OnClick" Grid.Column="4" Grid.Row="3"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Watched processes">
@@ -53,7 +53,7 @@
                         <RowDefinition Height="50" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="50" />
-                        <RowDefinition Height="50" />
+                        <RowDefinition Height="40" />
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
