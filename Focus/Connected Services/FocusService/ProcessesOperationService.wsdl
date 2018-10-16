@@ -4,7 +4,7 @@
     <xsd:schema targetNamespace="http://FocusProcessesOperations/Imports">
       <xsd:import schemaLocation="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd0" namespace="http://FocusProcessesOperations" />
       <xsd:import schemaLocation="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/FocusWcfService.Models" />
+      <xsd:import schemaLocation="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/FocusWcfService.Dtos" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IProcessesOperationsService_KillProcess_InputMessage">

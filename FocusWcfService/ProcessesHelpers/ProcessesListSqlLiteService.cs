@@ -18,15 +18,10 @@ namespace FocusWcfService.ProcessesHelpers {
             return this.repository.Filter<WatchedProcess>(x => x.Name == name).FirstOrDefault();
         }
 
-        public IEnumerable<WatchedProcessDto> GetCurrentlyRunningWatchedProcesses() {
+        public IEnumerable<WatchedProcessDto> GetAllWatchedProcesses() {
             var watchedProcesses = this.repository.GetAll();
 
             return this.MapWatchedProcessToDtos(watchedProcesses);
-        }
-
-        public IEnumerable<WatchedProcessDto> GetAllWatchedProcesses() {
-            var allProcesses = this.repository.GetAll();
-            return this.MapWatchedProcessToDtos(allProcesses);
         }
 
         public void AddWatchedProcess(string processName, TimeSpan allowedTime) {
@@ -78,7 +73,6 @@ namespace FocusWcfService.ProcessesHelpers {
                 throw new InvalidDataException($"Process with name: {procesName} does not exist in the database.");
             }
 
-            //dbEntry.IsRunning = isCurrentlyWatched;
             dbEntry.LastWatchedDate = DateTime.Today.Date;
             this.repository.Update(dbEntry);
         }

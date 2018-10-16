@@ -10,6 +10,8 @@ namespace Focus {
 
         private TimeSpan timeLeftToday { get; set; }
 
+        private string isProcessRunning { get; set; }
+
         public string Name {
             get => this.name;
             set => this.name = value;
@@ -43,6 +45,11 @@ namespace Focus {
                     this.timeLeftToday = new TimeSpan();
                 }
             }
+        }
+
+        public string IsProcessRunning {
+            get => this.isProcessRunning;
+            set => this.isProcessRunning = value;
         }
     }
 }

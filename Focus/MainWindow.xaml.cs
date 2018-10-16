@@ -5,6 +5,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Windows;
 using Focus.FocusService;
+using Focus.Helpers;
 using Focus.Views;
 
 namespace Focus {
@@ -155,7 +156,8 @@ namespace Focus {
                     return processes.Select(x => new WatchedProcessModel {
                         Name = x.Name,
                         TimePerDay = x.TimeAllowedPerDay.ToString(),
-                        TimeLeftToday = x.TimeLeft.ToString()
+                        TimeLeftToday = x.TimeLeft.ToString(),
+                        IsProcessRunning = x.IsCurrentlyRunning ? YesNoHelper.Yes : YesNoHelper.No
                     });
                 }
 

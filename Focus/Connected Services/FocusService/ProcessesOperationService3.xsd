@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://FocusProcessesOperations" elementFormDefault="qualified" targetNamespace="http://FocusProcessesOperations" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:import schemaLocation="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/FocusWcfService.Models" />
+  <xs:import schemaLocation="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/FocusWcfService.Dtos" />
   <xs:element name="KillProcess">
     <xs:complexType>
       <xs:sequence>
@@ -49,7 +49,7 @@
   <xs:element name="GetAllWatchedProcessesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/FocusWcfService.Models" minOccurs="0" name="GetAllWatchedProcessesResult" nillable="true" type="q2:ArrayOfWatchedProcess" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/FocusWcfService.Dtos" minOccurs="0" name="GetAllWatchedProcessesResult" nillable="true" type="q2:ArrayOfWatchedProcessDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

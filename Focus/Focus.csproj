@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\YesNoHelper.cs" />
     <Compile Include="Views\AllowedTimeDialog.xaml.cs">
       <DependentUpon>AllowedTimeDialog.xaml</DependentUpon>
     </Compile>
@@ -103,7 +104,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\FocusService\Focus.FocusService.WatchedProcess.datasource">
+    <None Include="Connected Services\FocusService\Focus.FocusService.WatchedProcessDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\FocusService\ProcessesOperationService.wsdl" />

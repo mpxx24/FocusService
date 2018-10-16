@@ -28,7 +28,7 @@ namespace FocusWcfService {
         }
 
         public IEnumerable<WatchedProcessDto> GetAllWatchedProcesses() {
-            var processes = this.processesListService.GetCurrentlyRunningWatchedProcesses();
+            var processes = this.processesListService.GetAllWatchedProcesses();
             return processes;
         }
 

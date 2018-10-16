@@ -6,7 +6,6 @@ using FocusWcfService.Models;
 namespace FocusWcfService.ProcessesHelpers {
     public interface IProcessesListSqlLiteService {
         WatchedProcess GetProcess(string name);
-        IEnumerable<WatchedProcessDto> GetCurrentlyRunningWatchedProcesses();
         IEnumerable<WatchedProcessDto> GetAllWatchedProcesses();
         void AddWatchedProcess(string processName, TimeSpan allowedTime);
         void RemoveWatchedProcess(string processName);

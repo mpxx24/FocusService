@@ -7,7 +7,6 @@ namespace FocusWcfService.Dtos {
         public TimeSpan TimeAllowedPerDay { get; set; }
         public TimeSpan TimeLeft { get; set; }
         public DateTime LastWatchedDate { get; set; }
-
         public bool IsCurrentlyRunning { get; set; }
     }
 }

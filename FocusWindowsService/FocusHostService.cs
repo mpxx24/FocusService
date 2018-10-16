@@ -4,7 +4,6 @@ using System.ServiceModel;
 using System.ServiceProcess;
 using System.Timers;
 using FocusWcfService;
-using FocusWcfService.Common;
 using FocusWcfService.Models;
 using FocusWcfService.ProcessesHelpers;
 
@@ -38,13 +37,13 @@ namespace FocusWindowsService {
         }
 
         private void StartWatcherTimer() {
-            var statusTime = new Timer {Interval = 30000};
+            var statusTime = new Timer {Interval = 1000};
             statusTime.Elapsed += this.OnTimerTick;
             statusTime.Enabled = true;
         }
 
         private void OnTimerTick(object sender, ElapsedEventArgs e) {
-            var processes = this.processesListService.GetCurrentlyRunningWatchedProcesses().ToList();
+            var processes = this.processesListService.GetAllWatchedProcesses().ToList();
 
             foreach (var watchedProcess in processes) {
                 this.processesListService.UpdateTimeForWatchedProcess(watchedProcess.Name);

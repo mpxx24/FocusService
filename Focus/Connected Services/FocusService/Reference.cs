@@ -15,9 +15,9 @@ namespace Focus.FocusService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="WatchedProcess", Namespace="http://schemas.datacontract.org/2004/07/FocusWcfService.Models")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="WatchedProcessDto", Namespace="http://schemas.datacontract.org/2004/07/FocusWcfService.Dtos")]
     [System.SerializableAttribute()]
-    public partial class WatchedProcess : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class WatchedProcessDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -26,7 +26,7 @@ namespace Focus.FocusService {
         private System.Guid IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsRunningField;
+        private bool IsCurrentlyRunningField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime LastWatchedDateField;
@@ -64,14 +64,14 @@ namespace Focus.FocusService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsRunning {
+        public bool IsCurrentlyRunning {
             get {
-                return this.IsRunningField;
+                return this.IsCurrentlyRunningField;
             }
             set {
-                if ((this.IsRunningField.Equals(value) != true)) {
-                    this.IsRunningField = value;
-                    this.RaisePropertyChanged("IsRunning");
+                if ((this.IsCurrentlyRunningField.Equals(value) != true)) {
+                    this.IsCurrentlyRunningField = value;
+                    this.RaisePropertyChanged("IsCurrentlyRunning");
                 }
             }
         }
@@ -171,12 +171,12 @@ namespace Focus.FocusService {
         [System.ServiceModel.OperationContractAttribute(Action="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcesse" +
             "s", ReplyAction="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcesse" +
             "sResponse")]
-        Focus.FocusService.WatchedProcess[] GetAllWatchedProcesses();
+        Focus.FocusService.WatchedProcessDto[] GetAllWatchedProcesses();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcesse" +
             "s", ReplyAction="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcesse" +
             "sResponse")]
-        System.Threading.Tasks.Task<Focus.FocusService.WatchedProcess[]> GetAllWatchedProcessesAsync();
+        System.Threading.Tasks.Task<Focus.FocusService.WatchedProcessDto[]> GetAllWatchedProcessesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://FocusProcessesOperations/IProcessesOperationsService/UpdateProcessInObserv" +
             "edProcessesList", ReplyAction="http://FocusProcessesOperations/IProcessesOperationsService/UpdateProcessInObserv" +
@@ -240,11 +240,11 @@ namespace Focus.FocusService {
             return base.Channel.RemoveProcessFromObservedProcessesListAsync(processName);
         }
         
-        public Focus.FocusService.WatchedProcess[] GetAllWatchedProcesses() {
+        public Focus.FocusService.WatchedProcessDto[] GetAllWatchedProcesses() {
             return base.Channel.GetAllWatchedProcesses();
         }
         
-        public System.Threading.Tasks.Task<Focus.FocusService.WatchedProcess[]> GetAllWatchedProcessesAsync() {
+        public System.Threading.Tasks.Task<Focus.FocusService.WatchedProcessDto[]> GetAllWatchedProcessesAsync() {
             return base.Channel.GetAllWatchedProcessesAsync();
         }
         
