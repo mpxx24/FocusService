@@ -14,8 +14,9 @@ namespace FocusWcfService.ProcessesHelpers {
             this.repository = repository;
         }
 
-        public WatchedProcess GetProcess(string name) {
-            return this.repository.Filter<WatchedProcess>(x => x.Name == name).FirstOrDefault();
+        public WatchedProcessDto GetProcess(string name) {
+            var process = this.GetWatchedProcess(name);
+            return MapWatchedProcessToDto(process);
         }
 
         public IEnumerable<WatchedProcessDto> GetAllWatchedProcesses() {
@@ -62,21 +63,6 @@ namespace FocusWcfService.ProcessesHelpers {
             return isProcessAlreadyWatched;
         }
 
-        public void SetProcessAsCurrentlyWatchedAsync(string procesName, bool isCurrentlyWatched) {
-            if (string.IsNullOrEmpty(procesName)) {
-                throw new InvalidDataException("Process name cannot be null or empty.");
-            }
-
-            var dbEntry = this.GetProcess(procesName);
-
-            if (dbEntry == null) {
-                throw new InvalidDataException($"Process with name: {procesName} does not exist in the database.");
-            }
-
-            dbEntry.LastWatchedDate = DateTime.Today.Date;
-            this.repository.Update(dbEntry);
-        }
-
         public void ChangeAllowedTimeForWatchedProcess(string processName, TimeSpan allowedTime) {
             var process = this.repository.Filter<WatchedProcess>(x => x.Name == processName).FirstOrDefault();
 
@@ -117,12 +103,16 @@ namespace FocusWcfService.ProcessesHelpers {
                 this.repository.Update(process);
             }
         }
-        
+
+        private WatchedProcess GetWatchedProcess(string name) {
+            return this.repository.Filter<WatchedProcess>(x => x.Name == name).FirstOrDefault();
+        }
+
         private IEnumerable<WatchedProcessDto> MapWatchedProcessToDtos(IEnumerable<WatchedProcess> watchedProcesses) {
             return watchedProcesses.Select(MapWatchedProcessToDto);
         }
 
-        public static WatchedProcessDto MapWatchedProcessToDto(WatchedProcess watchedProcess) {
+        private static WatchedProcessDto MapWatchedProcessToDto(WatchedProcess watchedProcess) {
             return new WatchedProcessDto {
                 Id = watchedProcess.Id,
                 Name = watchedProcess.Name,
