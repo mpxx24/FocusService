@@ -5,10 +5,13 @@ using System.Linq;
 using FocusWcfService.Common;
 using FocusWcfService.Dtos;
 using FocusWcfService.Models;
+using NLog;
 
 namespace FocusWcfService.ProcessesHelpers {
     public class ProcessesListSqlLiteService : IProcessesListSqlLiteService {
         private readonly IRepository<WatchedProcess> repository;
+
+        private ILogger dummyLogger = LogManager.GetCurrentClassLogger();
 
         public ProcessesListSqlLiteService(IRepository<WatchedProcess> repository) {
             this.repository = repository;
@@ -20,7 +23,11 @@ namespace FocusWcfService.ProcessesHelpers {
         }
 
         public IEnumerable<WatchedProcessDto> GetAllWatchedProcesses() {
-            var watchedProcesses = this.repository.GetAll();
+            var watchedProcesses = this.repository.GetAll().ToList();
+            this.dummyLogger.Debug($"Found {watchedProcesses.Count} watched process(es)");
+            watchedProcesses.ForEach(x => {
+                                         this.dummyLogger.Debug($"\t{x.Name} - {x.TimeAllowedPerDay} - {x.TimeLeft}");
+                                     });
 
             return this.MapWatchedProcessToDtos(watchedProcesses);
         }
@@ -90,6 +97,7 @@ namespace FocusWcfService.ProcessesHelpers {
                 process.LastWatchedDate = DateTime.Now.Date;
                 process.TimeLeft = process.TimeAllowedPerDay;
                 this.repository.Update(process);
+                this.dummyLogger.Debug($"Updated watched process '{process.Name}' - last watched: {process.LastWatchedDate}, time left: {process.TimeLeft}");
                 return;
             }
 
@@ -98,10 +106,12 @@ namespace FocusWcfService.ProcessesHelpers {
                 ProcessesHelper.KillProcess(process.Name);
                 process.TimeLeft = new TimeSpan();
                 this.repository.Update(process);
+                this.dummyLogger.Debug($"Killed process '{process.Name}'");
             }
             else {
                 this.repository.Update(process);
             }
+            this.dummyLogger.Debug($"Updated watched process '{process.Name}' - last watched: {process.LastWatchedDate}, time left: {process.TimeLeft}");
         }
 
         private WatchedProcess GetWatchedProcess(string name) {

@@ -37,13 +37,13 @@ namespace FocusWindowsService {
         }
 
         private void StartWatcherTimer() {
-            var statusTime = new Timer {Interval = 1000};
+            var statusTime = new Timer {Interval = 15000};
             statusTime.Elapsed += this.OnTimerTick;
             statusTime.Enabled = true;
         }
 
         private void OnTimerTick(object sender, ElapsedEventArgs e) {
-            var processes = this.processesListService.GetAllWatchedProcesses().ToList();
+            var processes = this.processesListService.GetAllWatchedProcesses();
 
             foreach (var watchedProcess in processes) {
                 this.processesListService.UpdateTimeForWatchedProcess(watchedProcess.Name);
