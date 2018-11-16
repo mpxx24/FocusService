@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using FocusWcfService.Dtos;
-using FocusWcfService.Models;
 
 namespace FocusWcfService {
     [ServiceContract(Namespace = "http://FocusProcessesOperations")]

@@ -37,7 +37,7 @@ namespace FocusWindowsService {
         }
 
         private void StartWatcherTimer() {
-            var statusTime = new Timer {Interval = 15000};
+            var statusTime = new Timer {Interval = 60000};
             statusTime.Elapsed += this.OnTimerTick;
             statusTime.Enabled = true;
         }

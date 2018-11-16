@@ -1,0 +1,55 @@
+﻿<Window x:Class="Focus.Views.WatchedLocationDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Focus.Views"
+        mc:Ignorable="d"
+        Title="Location to watch" Height="200" Width="450">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="75" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="LocationTextBox" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="200px" />
+                <Button x:Name="ChoosePathButon" Content="Choose path" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ChoosePathButon_Click" Width="100px" />
+            </Grid>
+
+            <Grid Grid.Column="0" Grid.Row="2" ColumnSpan="3" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+                
+                <!--TODO: split it into another grids-->
+                <TextBlock Text="File name" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <TextBox x:Name="FileNameTextBox" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="135px" />
+                <TextBlock Text="Choose action" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <ComboBox x:Name="ActionsCombobox" Text="Choose path" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Width="100px" SelectionChanged="ActionsCombobox_SelectionChanged"></ComboBox>
+            </Grid>
+
+            <TextBlock Text="Location to watch" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            
+            <Button Content="OK" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Click="OKButton_Click" Width="50px" />
+        </Grid>
+    </Grid>
+</Window>

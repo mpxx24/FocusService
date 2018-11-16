@@ -11,7 +11,7 @@ namespace FocusWcfService.ProcessesHelpers {
     public class ProcessesListSqlLiteService : IProcessesListSqlLiteService {
         private readonly IRepository<WatchedProcess> repository;
 
-        private ILogger dummyLogger = LogManager.GetCurrentClassLogger();
+        private readonly ILogger dummyLogger = LogManager.GetCurrentClassLogger();
 
         public ProcessesListSqlLiteService(IRepository<WatchedProcess> repository) {
             this.repository = repository;

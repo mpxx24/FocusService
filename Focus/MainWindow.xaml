@@ -35,7 +35,7 @@
                                         <Setter Property="IsHitTestVisible" Value="False"/>
                                     </Style>
                                 </GridView.ColumnHeaderContainerStyle>
-                                
+
                                 <GridViewColumn Header="Process Id" DisplayMemberBinding="{Binding Id}" Width="150px"/>
                                 <GridViewColumn Header="Process name" DisplayMemberBinding="{Binding Name}" Width="350px">
                                 </GridViewColumn>
@@ -83,7 +83,7 @@
                                         <Setter Property="IsHitTestVisible" Value="False"/>
                                     </Style>
                                 </GridView.ColumnHeaderContainerStyle>
-                                
+
                                 <GridViewColumn Header="Process name" DisplayMemberBinding="{Binding Name}" Width="350px"/>
                                 <GridViewColumn Header="Time allowed per day" DisplayMemberBinding="{Binding TimePerDay}" Width="120px"/>
                                 <GridViewColumn Header="Time left" DisplayMemberBinding="{Binding TimeLeftToday}" Width="120px"/>
@@ -112,7 +112,53 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Watched folders">
-                <!-- TODO: implement-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6" />
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition Width="53"/>
+                        <ColumnDefinition Width="182"/>
+                        <ColumnDefinition Width="250" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" VerticalAlignment="Center" Width="250" x:Name="SearchWatchedLocationsTextBox" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Margin="11,14,18,14"/>
+                    <Button Content="Search" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="22" Name="SearchWatchedLocationButton" Click="SearchButton_OnClick" Grid.Column="4" Grid.Row="0" Margin="0,14"/>
+
+                    <ListView HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="772" Name="LocationsWatchedListView" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding listViewWatchedSource}" Grid.Row="1" Grid.ColumnSpan="7" Grid.Column="0" Grid.RowSpan="2">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.ColumnHeaderContainerStyle>
+                                    <Style BasedOn="{StaticResource {x:Type GridViewColumnHeader}}" TargetType="{x:Type GridViewColumnHeader}">
+                                        <Setter Property="IsHitTestVisible" Value="False"/>
+                                    </Style>
+                                </GridView.ColumnHeaderContainerStyle>
+
+                                <GridViewColumn Header="Location" DisplayMemberBinding="{Binding Location}" Width="350px"/>
+                                <GridViewColumn Header="File name" DisplayMemberBinding="{Binding FileName}" Width="300px"/>
+                                <GridViewColumn Header="Action type" DisplayMemberBinding="{Binding ActionType}" Width="115px"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Content="Add location" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" Height="23" Name="AddWatchedLocationButton" Click="AddWatchedLocationButton_OnClick" Grid.Column="1" Grid.Row="0" />
+                        <Button Content="Remove location" HorizontalAlignment="Left" VerticalAlignment="Center" Width="125" Height="23" Name="RemoveWatchedLocationButton" Click="RemoveWatchedLocationButton_OnClick" Grid.Column="2" Grid.Row="0"/>
+                    </Grid>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

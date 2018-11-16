@@ -38,6 +38,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -60,6 +61,9 @@
     <Compile Include="Views\AllowedTimeDialog.xaml.cs">
       <DependentUpon>AllowedTimeDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WatchedLocationDialog.xaml.cs">
+      <DependentUpon>WatchedLocationDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WatchedProcessModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -79,6 +83,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\AllowedTimeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WatchedLocationDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -144,6 +152,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FocusWcfService\FocusWcfService.csproj">
+      <Project>{9982BCB0-344F-41D9-B430-FAC078FDAF18}</Project>
+      <Name>FocusWcfService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

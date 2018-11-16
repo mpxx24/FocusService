@@ -7,17 +7,18 @@ using System.Windows;
 using Focus.FocusService;
 using Focus.Helpers;
 using Focus.Views;
+using FocusWcfService.LocationsHelpers;
 
 namespace Focus {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow {
-        private ProcessesOperationsServiceClient client;
+        private ProcessesOperationsServiceClient processesOperationsClient;
 
         public MainWindow() {
             this.InitializeComponent();
-            this.client = new ProcessesOperationsServiceClient();
+            this.processesOperationsClient = new ProcessesOperationsServiceClient();
         }
 
         private void On_Window_Loaded(object sender, RoutedEventArgs e) {
@@ -47,11 +48,11 @@ namespace Focus {
         private void KillProcessButton_OnClick(object sender, RoutedEventArgs e) {
             var selectedItem = (ProcessModel) this.ProcessesListView.SelectedItem;
             try {
-                if (this.client.InnerChannel.State != CommunicationState.Faulted) {
-                    this.client.KillProcess(selectedItem.Name);
+                if (this.processesOperationsClient.InnerChannel.State != CommunicationState.Faulted) {
+                    this.processesOperationsClient.KillProcess(selectedItem.Name);
                 }
                 else {
-                    this.client = new ProcessesOperationsServiceClient();
+                    this.processesOperationsClient = new ProcessesOperationsServiceClient();
                     this.KillProcessButton_OnClick(sender, e);
                 }
             }
@@ -85,12 +86,12 @@ namespace Focus {
 
             var selectedItem = this.GetCurrentlySelectedItem();
             try {
-                if (this.client.InnerChannel.State != CommunicationState.Faulted) {
-                    this.client.AddProcessToObservedProcessesList(selectedItem.Name, timeSpanToSet);
+                if (this.processesOperationsClient.InnerChannel.State != CommunicationState.Faulted) {
+                    this.processesOperationsClient.AddProcessToObservedProcessesList(selectedItem.Name, timeSpanToSet);
                     this.RefreshWatchedProcessesListView();
                 }
                 else {
-                    this.client = new ProcessesOperationsServiceClient();
+                    this.processesOperationsClient = new ProcessesOperationsServiceClient();
                     this.AddTimeLimitButton_OnClick(sender, e);
                 }
             }
@@ -109,12 +110,12 @@ namespace Focus {
 
             var selectedItem = this.GetCurrentlySelectedWatchedItem();
             try {
-                if (this.client.InnerChannel.State != CommunicationState.Faulted) {
-                    this.client.UpdateProcessInObservedProcessesList(selectedItem.Name, timeSpanToSet);
+                if (this.processesOperationsClient.InnerChannel.State != CommunicationState.Faulted) {
+                    this.processesOperationsClient.UpdateProcessInObservedProcessesList(selectedItem.Name, timeSpanToSet);
                     this.RefreshWatchedProcessesListView();
                 }
                 else {
-                    this.client = new ProcessesOperationsServiceClient();
+                    this.processesOperationsClient = new ProcessesOperationsServiceClient();
                     this.AddTimeLimitButton_OnClick(sender, e);
                 }
             }
@@ -126,12 +127,12 @@ namespace Focus {
         private void RemoveTimeLimitButton_OnClick(object sender, RoutedEventArgs e) {
             var selectedItem = this.GetCurrentlySelectedWatchedItem();
             try {
-                if (this.client.InnerChannel.State != CommunicationState.Faulted) {
-                    this.client.RemoveProcessFromObservedProcessesList(selectedItem.Name);
+                if (this.processesOperationsClient.InnerChannel.State != CommunicationState.Faulted) {
+                    this.processesOperationsClient.RemoveProcessFromObservedProcessesList(selectedItem.Name);
                     this.RefreshWatchedProcessesListView();
                 }
                 else {
-                    this.client = new ProcessesOperationsServiceClient();
+                    this.processesOperationsClient = new ProcessesOperationsServiceClient();
                     this.RemoveTimeLimitButton_OnClick(sender, e);
                 }
             }
@@ -150,8 +151,8 @@ namespace Focus {
 
         private IEnumerable<WatchedProcessModel> GetWatchedProcesses() {
             try {
-                if (this.client.InnerChannel.State != CommunicationState.Faulted) {
-                    var processes = this.client.GetAllWatchedProcesses();
+                if (this.processesOperationsClient.InnerChannel.State != CommunicationState.Faulted) {
+                    var processes = this.processesOperationsClient.GetAllWatchedProcesses();
 
                     return processes.Select(x => new WatchedProcessModel {
                         Name = x.Name,
@@ -161,7 +162,7 @@ namespace Focus {
                     });
                 }
 
-                this.client = new ProcessesOperationsServiceClient();
+                this.processesOperationsClient = new ProcessesOperationsServiceClient();
                 return this.GetWatchedProcesses();
             }
             catch (EndpointNotFoundException) {
@@ -172,6 +173,38 @@ namespace Focus {
 
         private void RefreshWatchedProcessesListButton_OnClick(object sender, RoutedEventArgs e) {
             this.RefreshWatchedProcessesListView();
+        }
+
+        private void AddWatchedLocationButton_OnClick(object sender, RoutedEventArgs e) {
+            string location = string.Empty, fileName = string.Empty;
+            var action = WatchedLocationActionType.Nothing;
+            var allowedTimeDialog = new WatchedLocationDialog();
+
+            if (allowedTimeDialog.ShowDialog() == true) {
+                location = allowedTimeDialog.WatchedLocation;
+                fileName = allowedTimeDialog.FileName;
+                action = allowedTimeDialog.Action;
+            }
+
+            try {
+                //if (this.processesOperationsClient.InnerChannel.State != CommunicationState.Faulted)
+                //{
+                //    this.processesOperationsClient.add(location, fileName, action);
+                //    //this.RefreshWatchedLocationsListView();
+                //}
+                //else
+                //{
+                //    this.processesOperationsClient = new ProcessesOperationsServiceClient();
+                //    this.AddWatchedLocationButton_OnClick(sender, e);
+                //}
+            }
+            catch (EndpointNotFoundException) {
+                MessageBox.Show($"Could not add location [{location}] and file [{fileName}] to observed. Windows service 'FocusHostService' is most likely not running.");
+            }
+        }
+
+        private void RemoveWatchedLocationButton_OnClick(object sender, RoutedEventArgs e) {
+            
         }
     }
 }

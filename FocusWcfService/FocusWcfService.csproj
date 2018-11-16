@@ -101,7 +101,9 @@
     <Compile Include="Common\NHibernateHelper.cs" />
     <Compile Include="Common\Repository.cs" />
     <Compile Include="Dtos\WatchedProcessDto.cs" />
+    <Compile Include="ILocationsOperationsService.cs" />
     <Compile Include="LocationsHelpers\WatchedLocationActionType.cs" />
+    <Compile Include="LocationsOperationsService.cs" />
     <Compile Include="Models\WatchedLocation.cs" />
     <Compile Include="Models\WatchedLocationMap.cs" />
     <Compile Include="Models\WatchedProcess.cs" />
