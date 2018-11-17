@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/FocusWcfService.Dtos" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/FocusWcfService.Dtos" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Focus.Core.LocationsHelpers" />
   <xs:complexType name="ArrayOfWatchedProcessDto">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="WatchedProcessDto" nillable="true" type="tns:WatchedProcessDto" />
@@ -18,4 +19,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="WatchedProcessDto" nillable="true" type="tns:WatchedProcessDto" />
+  <xs:complexType name="ArrayOfWatchedLocationDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WatchedLocationDto" nillable="true" type="tns:WatchedLocationDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWatchedLocationDto" nillable="true" type="tns:ArrayOfWatchedLocationDto" />
+  <xs:complexType name="WatchedLocationDto">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Focus.Core.LocationsHelpers" minOccurs="0" name="ActionType" type="q1:WatchedLocationActionType" />
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="LocationPath" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WatchedLocationDto" nillable="true" type="tns:WatchedLocationDto" />
 </xs:schema>

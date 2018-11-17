@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using System.ServiceProcess;
 using System.Timers;
 using FocusWcfService;
-using FocusWcfService.Models;
 using FocusWcfService.ProcessesHelpers;
+using NLog;
 
 namespace FocusWindowsService {
     public partial class FocusHostService : ServiceBase {
-        protected static List<WatchedProcess> InitialListToWatch = new List<WatchedProcess>();
+        private readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         private readonly IProcessesListSqlLiteService processesListService;
 
@@ -32,15 +31,23 @@ namespace FocusWindowsService {
         }
 
         private void StartHostingWcfService(object operationsService) {
+            this.logger.Debug("Trying to open new service host. Hosting WCF service.");
+
             this.serviceHost?.Close();
             this.serviceHost = new ServiceHost(operationsService);
             var behaviour = this.serviceHost.Description.Behaviors.Find<ServiceBehaviorAttribute>();
             behaviour.InstanceContextMode = InstanceContextMode.Single;
             this.serviceHost.Open();
+
+            this.logger.Debug("Succesfully opened new service host.");
         }
 
         private void StartWatcherTimer() {
-            var statusTime = new Timer {Interval = 60000};
+            var interval = 60000;
+
+            this.logger.Debug($"Starting service timer! Interval: {interval}");
+
+            var statusTime = new Timer {Interval = interval};
             statusTime.Elapsed += this.OnTimerTick;
             statusTime.Enabled = true;
         }
@@ -54,7 +61,11 @@ namespace FocusWindowsService {
         }
 
         protected override void OnStop() {
+            this.logger.Debug("Stopping windows service!");
+
             if (this.serviceHost != null) {
+                this.logger.Debug("Stopping to host WCF service!");
+
                 this.serviceHost.Close();
                 this.serviceHost = null;
             }

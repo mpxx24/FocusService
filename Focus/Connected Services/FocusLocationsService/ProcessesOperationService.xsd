@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://FocusLocationsOperations" elementFormDefault="qualified" targetNamespace="http://FocusLocationsOperations" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Focus.Core.LocationsHelpers" />
+  <xs:import schemaLocation="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/FocusWcfService.Dtos" />
   <xs:element name="AddLocationToObservedLocationsList">
     <xs:complexType>
       <xs:sequence>
@@ -26,6 +27,18 @@
   <xs:element name="RemoveLocationFromObservedLocationsListResponse">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllWatchedLocations">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllWatchedLocationsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/FocusWcfService.Dtos" minOccurs="0" name="GetAllWatchedLocationsResult" nillable="true" type="q2:ArrayOfWatchedLocationDto" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>

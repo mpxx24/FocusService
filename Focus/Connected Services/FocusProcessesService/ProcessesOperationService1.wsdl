@@ -21,6 +21,12 @@
   <wsdl:message name="ILocationsOperationsService_RemoveLocationFromObservedLocationsList_OutputMessage">
     <wsdl:part name="parameters" element="tns:RemoveLocationFromObservedLocationsListResponse" />
   </wsdl:message>
+  <wsdl:message name="ILocationsOperationsService_GetAllWatchedLocations_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllWatchedLocations" />
+  </wsdl:message>
+  <wsdl:message name="ILocationsOperationsService_GetAllWatchedLocations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllWatchedLocationsResponse" />
+  </wsdl:message>
   <wsdl:portType name="ILocationsOperationsService">
     <wsdl:operation name="AddLocationToObservedLocationsList">
       <wsdl:input wsaw:Action="http://FocusLocationsOperations/ILocationsOperationsService/AddLocationToObservedLocationsList" message="tns:ILocationsOperationsService_AddLocationToObservedLocationsList_InputMessage" />
@@ -29,6 +35,10 @@
     <wsdl:operation name="RemoveLocationFromObservedLocationsList">
       <wsdl:input wsaw:Action="http://FocusLocationsOperations/ILocationsOperationsService/RemoveLocationFromObservedLocationsList" message="tns:ILocationsOperationsService_RemoveLocationFromObservedLocationsList_InputMessage" />
       <wsdl:output wsaw:Action="http://FocusLocationsOperations/ILocationsOperationsService/RemoveLocationFromObservedLocationsListResponse" message="tns:ILocationsOperationsService_RemoveLocationFromObservedLocationsList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllWatchedLocations">
+      <wsdl:input wsaw:Action="http://FocusLocationsOperations/ILocationsOperationsService/GetAllWatchedLocations" message="tns:ILocationsOperationsService_GetAllWatchedLocations_InputMessage" />
+      <wsdl:output wsaw:Action="http://FocusLocationsOperations/ILocationsOperationsService/GetAllWatchedLocationsResponse" message="tns:ILocationsOperationsService_GetAllWatchedLocations_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

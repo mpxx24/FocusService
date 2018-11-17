@@ -57,7 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Connected Services\FocusLocalizationsService\Reference.cs">
+    <Compile Include="Connected Services\FocusLocationsService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -69,6 +69,7 @@
     <Compile Include="Views\WatchedLocationDialog.xaml.cs">
       <DependentUpon>WatchedLocationDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WatchedLocationModel.cs" />
     <Compile Include="WatchedProcessModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -117,7 +118,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\FocusLocalizationsService\Focus.FocusLocalizationsService.WatchedProcessDto.datasource">
+    <None Include="Connected Services\FocusLocationsService\Focus.FocusLocationsService.WatchedLocationDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FocusLocationsService\Focus.FocusLocationsService.WatchedProcessDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FocusProcessesService\Focus.FocusProcessesService.WatchedLocationDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\FocusProcessesService\Focus.FocusProcessesService.WatchedProcessDto.datasource">
@@ -141,24 +148,24 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\FocusProcessesService\ProcessesOperationsService.wsdl" />
-    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationService.wsdl" />
-    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationService.xsd">
+    <None Include="Connected Services\FocusLocationsService\ProcessesOperationService.wsdl" />
+    <None Include="Connected Services\FocusLocationsService\ProcessesOperationService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationService1.wsdl" />
-    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationService1.xsd">
+    <None Include="Connected Services\FocusLocationsService\ProcessesOperationService1.wsdl" />
+    <None Include="Connected Services\FocusLocationsService\ProcessesOperationService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationService2.xsd">
+    <None Include="Connected Services\FocusLocationsService\ProcessesOperationService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationService3.xsd">
+    <None Include="Connected Services\FocusLocationsService\ProcessesOperationService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationService4.xsd">
+    <None Include="Connected Services\FocusLocationsService\ProcessesOperationService4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationsService.wsdl" />
+    <None Include="Connected Services\FocusLocationsService\ProcessesOperationsService.wsdl" />
     <None Include="Properties\DataSources\System.Diagnostics.Process.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -173,7 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\FocusProcessesService\" />
-    <WCFMetadataStorage Include="Connected Services\FocusLocalizationsService\" />
+    <WCFMetadataStorage Include="Connected Services\FocusLocationsService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\FocusProcessesService\configuration91.svcinfo" />
@@ -198,13 +205,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\FocusLocalizationsService\configuration91.svcinfo" />
+    <None Include="Connected Services\FocusLocationsService\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\FocusLocalizationsService\configuration.svcinfo" />
+    <None Include="Connected Services\FocusLocationsService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\FocusLocalizationsService\Reference.svcmap">
+    <None Include="Connected Services\FocusLocationsService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

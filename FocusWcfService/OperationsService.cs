@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using Focus.Core.LocationsHelpers;
 using FocusWcfService.Dtos;
+using FocusWcfService.LocationsHelpers;
 using FocusWcfService.ProcessesHelpers;
 
 namespace FocusWcfService {
     public class OperationsService : IProcessesOperationsService, ILocationsOperationsService {
         private readonly IProcessesListSqlLiteService processesListService;
+        private readonly ILocationsListSqlLiteService locationsListService;
         
-        public OperationsService(IProcessesListSqlLiteService processesListService) {
+        public OperationsService(IProcessesListSqlLiteService processesListService, ILocationsListSqlLiteService locationsListService) {
             this.processesListService = processesListService;
+            this.locationsListService = locationsListService;
         }
 
         public bool KillProcess(string name) {
@@ -38,9 +41,15 @@ namespace FocusWcfService {
         }
 
         public void AddLocationToObservedLocationsList(string path, string fileName, WatchedLocationActionType actionType) {
+            this.locationsListService.AddWatchedLocationAndFile(path, fileName, actionType);
         }
 
         public void RemoveLocationFromObservedLocationsList(string path, string fileName) {
+            this.locationsListService.RemoveWatchedLocationAndFile(path, fileName);
+        }
+
+        public IEnumerable<WatchedLocationDto> GetAllWatchedLocations() {
+            return this.locationsListService.GetAllWatchedLocations();
         }
     }
 }

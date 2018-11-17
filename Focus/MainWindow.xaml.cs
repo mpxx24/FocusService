@@ -4,19 +4,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using System.Windows;
+using Focus.Core.LocationsHelpers;
 using Focus.FocusProcessesService;
 using Focus.Helpers;
 using Focus.Views;
-using WatchedLocationActionType = Focus.Core.LocationsHelpers.WatchedLocationActionType;
 
 namespace Focus {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow {
+        private readonly LocationsOperationsServiceClient locationsOperationsClient;
         private ProcessesOperationsServiceClient processesOperationsClient;
-
-        private LocationsOperationsServiceClient locationsOperationsClient;
 
         public MainWindow() {
             this.InitializeComponent();
@@ -70,11 +69,13 @@ namespace Focus {
         private void FullyRefreshProcessesListViews() {
             this.RefreshProcessesListView();
             this.RefreshWatchedProcessesListView();
+            this.RefreshWatchedLocationsListView();
         }
 
         private void RefreshProcessesListView() {
             this.ProcessesListView.ItemsSource = this.GetProcessList().OrderBy(x => x.Name);
         }
+
         private void RefreshWatchedProcessesListView() {
             this.ProcessesWatchedListView.ItemsSource = this.GetWatchedProcesses().OrderBy(x => x.Name);
         }
@@ -192,7 +193,7 @@ namespace Focus {
             try {
                 if (this.locationsOperationsClient.InnerChannel.State != CommunicationState.Faulted) {
                     this.locationsOperationsClient.AddLocationToObservedLocationsList(location, fileName, action);
-                    //this.RefreshWatchedLocationsListView();
+                    this.RefreshWatchedLocationsListView();
                 }
                 else {
                     this.processesOperationsClient = new ProcessesOperationsServiceClient();
@@ -204,8 +205,33 @@ namespace Focus {
             }
         }
 
+        private void RefreshWatchedLocationsListView() {
+            this.LocationsWatchedListView.ItemsSource = this.GetWatchedLocations();
+        }
+
+        private IEnumerable<WatchedLocationModel> GetWatchedLocations() {
+            try {
+                if (this.processesOperationsClient.InnerChannel.State != CommunicationState.Faulted) {
+                    var processes = this.locationsOperationsClient.GetAllWatchedLocations();
+
+                    return processes.Select(x => new WatchedLocationModel {
+                        Location = x.LocationPath,
+                        FileName = x.FileName,
+                        ActionType = x.ActionType.ToString()
+                    });
+                }
+
+                this.processesOperationsClient = new ProcessesOperationsServiceClient();
+                return this.GetWatchedLocations();
+            }
+            catch (EndpointNotFoundException) {
+                MessageBox.Show($"Could not get watched locations list. Windows service 'FocusHostService' is most likely not running.");
+            }
+            return new List<WatchedLocationModel>();
+        }
+
         private void RemoveWatchedLocationButton_OnClick(object sender, RoutedEventArgs e) {
-            
+            this.LocationsWatchedListView.ItemsSource = this.GetWatchedLocations().OrderBy(x => x.Location);
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.Generic;
+using System.ServiceModel;
 using Focus.Core.LocationsHelpers;
+using FocusWcfService.Dtos;
 
 namespace FocusWcfService {
     [ServiceContract(Namespace = "http://FocusLocationsOperations")]
@@ -9,5 +11,8 @@ namespace FocusWcfService {
 
         [OperationContract]
         void RemoveLocationFromObservedLocationsList(string path, string fileName);
+
+        [OperationContract]
+        IEnumerable<WatchedLocationDto> GetAllWatchedLocations();
     }
 }

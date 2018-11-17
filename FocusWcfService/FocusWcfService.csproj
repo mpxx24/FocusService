@@ -100,8 +100,11 @@
     <Compile Include="Common\IRepository.cs" />
     <Compile Include="Common\NHibernateHelper.cs" />
     <Compile Include="Common\Repository.cs" />
+    <Compile Include="Dtos\WatchedLocationDto.cs" />
     <Compile Include="Dtos\WatchedProcessDto.cs" />
     <Compile Include="ILocationsOperationsService.cs" />
+    <Compile Include="LocationsHelpers\ILocationsListSqlLiteService.cs" />
+    <Compile Include="LocationsHelpers\LocationsListSqlLiteService.cs" />
     <Compile Include="Models\WatchedLocation.cs" />
     <Compile Include="Models\WatchedLocationMap.cs" />
     <Compile Include="Models\WatchedProcess.cs" />
