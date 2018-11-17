@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
 using System.ServiceProcess;
 using System.Timers;
@@ -27,13 +26,17 @@ namespace FocusWindowsService {
         protected override void OnStart(string[] args) {
             //Debugger.Launch();
 
+            this.StartHostingWcfService(this.processesOperationsService);
+
+            this.StartWatcherTimer();
+        }
+
+        private void StartHostingWcfService(object operationsService) {
             this.serviceHost?.Close();
-            this.serviceHost = new ServiceHost(this.processesOperationsService);
+            this.serviceHost = new ServiceHost(operationsService);
             var behaviour = this.serviceHost.Description.Behaviors.Find<ServiceBehaviorAttribute>();
             behaviour.InstanceContextMode = InstanceContextMode.Single;
             this.serviceHost.Open();
-
-            this.StartWatcherTimer();
         }
 
         private void StartWatcherTimer() {

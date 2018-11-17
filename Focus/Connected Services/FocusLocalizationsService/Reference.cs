@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Focus.FocusService {
+namespace Focus.FocusLocalizationsService {
     using System.Runtime.Serialization;
     using System;
     
@@ -139,7 +139,7 @@ namespace Focus.FocusService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://FocusProcessesOperations", ConfigurationName="FocusService.IProcessesOperationsService")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://FocusProcessesOperations", ConfigurationName="FocusLocalizationsService.IProcessesOperationsService")]
     public interface IProcessesOperationsService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://FocusProcessesOperations/IProcessesOperationsService/KillProcess", ReplyAction="http://FocusProcessesOperations/IProcessesOperationsService/KillProcessResponse")]
@@ -171,12 +171,12 @@ namespace Focus.FocusService {
         [System.ServiceModel.OperationContractAttribute(Action="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcesse" +
             "s", ReplyAction="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcesse" +
             "sResponse")]
-        Focus.FocusService.WatchedProcessDto[] GetAllWatchedProcesses();
+        Focus.FocusLocalizationsService.WatchedProcessDto[] GetAllWatchedProcesses();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcesse" +
             "s", ReplyAction="http://FocusProcessesOperations/IProcessesOperationsService/GetAllWatchedProcesse" +
             "sResponse")]
-        System.Threading.Tasks.Task<Focus.FocusService.WatchedProcessDto[]> GetAllWatchedProcessesAsync();
+        System.Threading.Tasks.Task<Focus.FocusLocalizationsService.WatchedProcessDto[]> GetAllWatchedProcessesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://FocusProcessesOperations/IProcessesOperationsService/UpdateProcessInObserv" +
             "edProcessesList", ReplyAction="http://FocusProcessesOperations/IProcessesOperationsService/UpdateProcessInObserv" +
@@ -190,12 +190,12 @@ namespace Focus.FocusService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IProcessesOperationsServiceChannel : Focus.FocusService.IProcessesOperationsService, System.ServiceModel.IClientChannel {
+    public interface IProcessesOperationsServiceChannel : Focus.FocusLocalizationsService.IProcessesOperationsService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ProcessesOperationsServiceClient : System.ServiceModel.ClientBase<Focus.FocusService.IProcessesOperationsService>, Focus.FocusService.IProcessesOperationsService {
+    public partial class ProcessesOperationsServiceClient : System.ServiceModel.ClientBase<Focus.FocusLocalizationsService.IProcessesOperationsService>, Focus.FocusLocalizationsService.IProcessesOperationsService {
         
         public ProcessesOperationsServiceClient() {
         }
@@ -240,11 +240,11 @@ namespace Focus.FocusService {
             return base.Channel.RemoveProcessFromObservedProcessesListAsync(processName);
         }
         
-        public Focus.FocusService.WatchedProcessDto[] GetAllWatchedProcesses() {
+        public Focus.FocusLocalizationsService.WatchedProcessDto[] GetAllWatchedProcesses() {
             return base.Channel.GetAllWatchedProcesses();
         }
         
-        public System.Threading.Tasks.Task<Focus.FocusService.WatchedProcessDto[]> GetAllWatchedProcessesAsync() {
+        public System.Threading.Tasks.Task<Focus.FocusLocalizationsService.WatchedProcessDto[]> GetAllWatchedProcessesAsync() {
             return base.Channel.GetAllWatchedProcessesAsync();
         }
         
@@ -254,6 +254,75 @@ namespace Focus.FocusService {
         
         public System.Threading.Tasks.Task UpdateProcessInObservedProcessesListAsync(string processName, System.TimeSpan allowedTime) {
             return base.Channel.UpdateProcessInObservedProcessesListAsync(processName, allowedTime);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://FocusLocationsOperations", ConfigurationName="FocusLocalizationsService.ILocationsOperationsService")]
+    public interface ILocationsOperationsService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://FocusLocationsOperations/ILocationsOperationsService/AddLocationToObserved" +
+            "LocationsList", ReplyAction="http://FocusLocationsOperations/ILocationsOperationsService/AddLocationToObserved" +
+            "LocationsListResponse")]
+        void AddLocationToObservedLocationsList(string path, string fileName, Focus.Core.LocationsHelpers.WatchedLocationActionType actionType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://FocusLocationsOperations/ILocationsOperationsService/AddLocationToObserved" +
+            "LocationsList", ReplyAction="http://FocusLocationsOperations/ILocationsOperationsService/AddLocationToObserved" +
+            "LocationsListResponse")]
+        System.Threading.Tasks.Task AddLocationToObservedLocationsListAsync(string path, string fileName, Focus.Core.LocationsHelpers.WatchedLocationActionType actionType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://FocusLocationsOperations/ILocationsOperationsService/RemoveLocationFromObs" +
+            "ervedLocationsList", ReplyAction="http://FocusLocationsOperations/ILocationsOperationsService/RemoveLocationFromObs" +
+            "ervedLocationsListResponse")]
+        void RemoveLocationFromObservedLocationsList(string path, string fileName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://FocusLocationsOperations/ILocationsOperationsService/RemoveLocationFromObs" +
+            "ervedLocationsList", ReplyAction="http://FocusLocationsOperations/ILocationsOperationsService/RemoveLocationFromObs" +
+            "ervedLocationsListResponse")]
+        System.Threading.Tasks.Task RemoveLocationFromObservedLocationsListAsync(string path, string fileName);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ILocationsOperationsServiceChannel : Focus.FocusLocalizationsService.ILocationsOperationsService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class LocationsOperationsServiceClient : System.ServiceModel.ClientBase<Focus.FocusLocalizationsService.ILocationsOperationsService>, Focus.FocusLocalizationsService.ILocationsOperationsService {
+        
+        public LocationsOperationsServiceClient() {
+        }
+        
+        public LocationsOperationsServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public LocationsOperationsServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public LocationsOperationsServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public LocationsOperationsServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public void AddLocationToObservedLocationsList(string path, string fileName, Focus.Core.LocationsHelpers.WatchedLocationActionType actionType) {
+            base.Channel.AddLocationToObservedLocationsList(path, fileName, actionType);
+        }
+        
+        public System.Threading.Tasks.Task AddLocationToObservedLocationsListAsync(string path, string fileName, Focus.Core.LocationsHelpers.WatchedLocationActionType actionType) {
+            return base.Channel.AddLocationToObservedLocationsListAsync(path, fileName, actionType);
+        }
+        
+        public void RemoveLocationFromObservedLocationsList(string path, string fileName) {
+            base.Channel.RemoveLocationFromObservedLocationsList(path, fileName);
+        }
+        
+        public System.Threading.Tasks.Task RemoveLocationFromObservedLocationsListAsync(string path, string fileName) {
+            return base.Channel.RemoveLocationFromObservedLocationsListAsync(path, fileName);
         }
     }
 }

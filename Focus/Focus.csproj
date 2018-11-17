@@ -57,7 +57,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Helpers\YesNoHelper.cs" />
+    <Compile Include="Connected Services\FocusLocalizationsService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="LocationsHelpers\WatchedLocationActionType.cs" />
     <Compile Include="Views\AllowedTimeDialog.xaml.cs">
       <DependentUpon>AllowedTimeDialog.xaml</DependentUpon>
     </Compile>
@@ -73,7 +78,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Connected Services\FocusService\Reference.cs">
+    <Compile Include="Connected Services\FocusProcessesService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -112,20 +117,48 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\FocusService\Focus.FocusService.WatchedProcessDto.datasource">
+    <None Include="Connected Services\FocusLocalizationsService\Focus.FocusLocalizationsService.WatchedProcessDto.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\FocusService\ProcessesOperationService.wsdl" />
-    <None Include="Connected Services\FocusService\ProcessesOperationService.xsd">
+    <None Include="Connected Services\FocusProcessesService\Focus.FocusProcessesService.WatchedProcessDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FocusProcessesService\ProcessesOperationService.wsdl" />
+    <None Include="Connected Services\FocusProcessesService\ProcessesOperationService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FocusService\ProcessesOperationService2.xsd">
+    <None Include="Connected Services\FocusProcessesService\ProcessesOperationService1.wsdl" />
+    <None Include="Connected Services\FocusProcessesService\ProcessesOperationService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FocusService\ProcessesOperationService3.xsd">
+    <None Include="Connected Services\FocusProcessesService\ProcessesOperationService11.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FocusService\ProcessesOperationsService.wsdl" />
+    <None Include="Connected Services\FocusProcessesService\ProcessesOperationService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FocusProcessesService\ProcessesOperationService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FocusProcessesService\ProcessesOperationsService.wsdl" />
+    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationService.wsdl" />
+    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationService1.wsdl" />
+    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FocusLocalizationsService\ProcessesOperationsService.wsdl" />
     <None Include="Properties\DataSources\System.Diagnostics.Process.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -139,25 +172,42 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\FocusService\" />
+    <WCFMetadataStorage Include="Connected Services\FocusProcessesService\" />
+    <WCFMetadataStorage Include="Connected Services\FocusLocalizationsService\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\FocusService\configuration91.svcinfo" />
+    <None Include="Connected Services\FocusProcessesService\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\FocusService\configuration.svcinfo" />
+    <None Include="Connected Services\FocusProcessesService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\FocusService\Reference.svcmap">
+    <None Include="Connected Services\FocusProcessesService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Focus.Core\Focus.Core.csproj">
+      <Project>{6584eb32-7476-4b29-bc4a-4398a0c46d20}</Project>
+      <Name>Focus.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FocusWcfService\FocusWcfService.csproj">
       <Project>{9982BCB0-344F-41D9-B430-FAC078FDAF18}</Project>
       <Name>FocusWcfService</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\FocusLocalizationsService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\FocusLocalizationsService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\FocusLocalizationsService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

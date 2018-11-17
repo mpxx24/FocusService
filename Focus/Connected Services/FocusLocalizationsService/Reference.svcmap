@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6b188e91-cf80-4cc9-8248-35f176e3f630" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ProcessesOperationService.xsd" MetadataType="Schema" ID="f52a889a-843d-4b4a-a2f8-29090973dbd7" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd3" />
+    <MetadataFile FileName="ProcessesOperationService1.xsd" MetadataType="Schema" ID="243e18ed-39d1-4cb6-b5ba-fc9ac672e6e7" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd2" />
+    <MetadataFile FileName="ProcessesOperationService2.xsd" MetadataType="Schema" ID="244d5148-3a1f-4ce8-81ce-4e284f0ec6df" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd1" />
+    <MetadataFile FileName="ProcessesOperationService3.xsd" MetadataType="Schema" ID="a8d6338f-7a00-420f-862a-387b14a787b8" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd0" />
+    <MetadataFile FileName="ProcessesOperationService.wsdl" MetadataType="Wsdl" ID="e382bbe6-da36-47f9-be54-c483fd445752" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?wsdl=wsdl0" />
+    <MetadataFile FileName="ProcessesOperationService1.wsdl" MetadataType="Wsdl" ID="4bcbadd6-c166-4032-80fa-44e74c73c7f9" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?wsdl=wsdl1" />
+    <MetadataFile FileName="ProcessesOperationsService.wsdl" MetadataType="Wsdl" ID="e95d0687-4492-44e7-942e-5b96300be60a" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?wsdl" />
+    <MetadataFile FileName="ProcessesOperationService4.xsd" MetadataType="Schema" ID="862791a0-b7b5-4cb9-9358-df38fd2114e3" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd4" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

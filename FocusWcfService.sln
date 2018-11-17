@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FocusWindowsService", "Focu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Focus", "Focus\Focus.csproj", "{848F4923-8848-43EA-BE34-CD2A47C3D249}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Focus.Core", "Focus.Core\Focus.Core.csproj", "{6584EB32-7476-4B29-BC4A-4398A0C46D20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{848F4923-8848-43EA-BE34-CD2A47C3D249}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{848F4923-8848-43EA-BE34-CD2A47C3D249}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{848F4923-8848-43EA-BE34-CD2A47C3D249}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6584EB32-7476-4B29-BC4A-4398A0C46D20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6584EB32-7476-4B29-BC4A-4398A0C46D20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6584EB32-7476-4B29-BC4A-4398A0C46D20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6584EB32-7476-4B29-BC4A-4398A0C46D20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

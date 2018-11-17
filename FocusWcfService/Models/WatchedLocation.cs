@@ -1,5 +1,5 @@
 ﻿using System;
-using FocusWcfService.LocationsHelpers;
+using Focus.Core.LocationsHelpers;
 
 namespace FocusWcfService.Models {
     public class WatchedLocation {

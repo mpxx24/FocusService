@@ -1,9 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using Focus.Helpers;
-using FocusWcfService.LocationsHelpers;
-using ComboBox = System.Windows.Forms.ComboBox;
+using Focus.Core.LocationsHelpers;
 using MessageBox = System.Windows.MessageBox;
 
 namespace Focus.Views {

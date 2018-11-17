@@ -99,6 +99,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Focus.Core\Focus.Core.csproj">
+      <Project>{6584eb32-7476-4b29-bc4a-4398a0c46d20}</Project>
+      <Name>Focus.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FocusWcfService\FocusWcfService.csproj">
       <Project>{9982BCB0-344F-41D9-B430-FAC078FDAF18}</Project>
       <Name>FocusWcfService</Name>

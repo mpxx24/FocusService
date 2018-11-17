@@ -1,5 +1,5 @@
 ﻿using System.ServiceModel;
-using FocusWcfService.LocationsHelpers;
+using Focus.Core.LocationsHelpers;
 
 namespace FocusWcfService {
     [ServiceContract(Namespace = "http://FocusLocationsOperations")]

@@ -1,8 +1,6 @@
-﻿using System.Diagnostics;
-using System.ServiceProcess;
+﻿using System.ServiceProcess;
 using Autofac;
 using FocusWcfService;
-using FocusWcfService.Common;
 using FocusWcfService.ProcessesHelpers;
 
 namespace FocusWindowsService {

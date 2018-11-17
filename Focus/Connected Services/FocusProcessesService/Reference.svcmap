@@ -22,11 +22,14 @@
     <MetadataSource Address="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
+    <MetadataFile FileName="ProcessesOperationService1.xsd" MetadataType="Schema" ID="6c390166-6570-49ce-9304-bfe30a00f2cb" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd3" />
     <MetadataFile FileName="ProcessesOperationService.xsd" MetadataType="Schema" ID="a1fe72e4-ce75-4926-bb9d-20f9641ee0e7" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd2" />
     <MetadataFile FileName="ProcessesOperationService2.xsd" MetadataType="Schema" ID="3bf48146-fa1e-4b38-a8a4-ac9cd7e70cf1" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd1" />
     <MetadataFile FileName="ProcessesOperationService3.xsd" MetadataType="Schema" ID="2a068b8f-532d-4e7c-8778-087366e0b8a9" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd0" />
     <MetadataFile FileName="ProcessesOperationService.wsdl" MetadataType="Wsdl" ID="5e251f17-2f13-4758-8864-adcfb7ab128f" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?wsdl=wsdl0" />
+    <MetadataFile FileName="ProcessesOperationService1.wsdl" MetadataType="Wsdl" ID="d45287d5-0c85-4aa4-8765-a964f1cc90db" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?wsdl=wsdl1" />
     <MetadataFile FileName="ProcessesOperationsService.wsdl" MetadataType="Wsdl" ID="b2ad209b-6235-41af-bf96-fd44c1ecf065" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?wsdl" />
+    <MetadataFile FileName="ProcessesOperationService11.xsd" MetadataType="Schema" ID="d62bae2f-b8ef-49e0-83e8-1b60966c0594" SourceId="1" SourceUrl="http://localhost:8000/FocusProcessesOperations/ProcessesOperationService?xsd=xsd4" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

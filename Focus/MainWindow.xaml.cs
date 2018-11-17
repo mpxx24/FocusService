@@ -4,10 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using System.Windows;
-using Focus.FocusService;
+using Focus.FocusProcessesService;
 using Focus.Helpers;
 using Focus.Views;
-using FocusWcfService.LocationsHelpers;
+using WatchedLocationActionType = Focus.Core.LocationsHelpers.WatchedLocationActionType;
 
 namespace Focus {
     /// <summary>
@@ -16,9 +16,12 @@ namespace Focus {
     public partial class MainWindow {
         private ProcessesOperationsServiceClient processesOperationsClient;
 
+        private LocationsOperationsServiceClient locationsOperationsClient;
+
         public MainWindow() {
             this.InitializeComponent();
             this.processesOperationsClient = new ProcessesOperationsServiceClient();
+            this.locationsOperationsClient = new LocationsOperationsServiceClient();
         }
 
         private void On_Window_Loaded(object sender, RoutedEventArgs e) {
@@ -187,16 +190,14 @@ namespace Focus {
             }
 
             try {
-                //if (this.processesOperationsClient.InnerChannel.State != CommunicationState.Faulted)
-                //{
-                //    this.processesOperationsClient.add(location, fileName, action);
-                //    //this.RefreshWatchedLocationsListView();
-                //}
-                //else
-                //{
-                //    this.processesOperationsClient = new ProcessesOperationsServiceClient();
-                //    this.AddWatchedLocationButton_OnClick(sender, e);
-                //}
+                if (this.locationsOperationsClient.InnerChannel.State != CommunicationState.Faulted) {
+                    this.locationsOperationsClient.AddLocationToObservedLocationsList(location, fileName, action);
+                    //this.RefreshWatchedLocationsListView();
+                }
+                else {
+                    this.processesOperationsClient = new ProcessesOperationsServiceClient();
+                    this.AddWatchedLocationButton_OnClick(sender, e);
+                }
             }
             catch (EndpointNotFoundException) {
                 MessageBox.Show($"Could not add location [{location}] and file [{fileName}] to observed. Windows service 'FocusHostService' is most likely not running.");
