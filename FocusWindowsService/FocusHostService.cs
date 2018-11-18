@@ -1,8 +1,11 @@
-﻿using System.ServiceModel;
+﻿using System.IO;
+using System.ServiceModel;
 using System.ServiceProcess;
+using System.Threading.Tasks;
 using System.Timers;
 using FocusWcfService;
 using FocusWcfService.ProcessesHelpers;
+using FocusWindowsService.FilesHelpers;
 using NLog;
 
 namespace FocusWindowsService {
@@ -13,11 +16,14 @@ namespace FocusWindowsService {
 
         private readonly IProcessesOperationsService processesOperationsService;
 
+        private readonly ILocationsOperationsService locationsOperationsService;
+
         private ServiceHost serviceHost;
 
-        public FocusHostService(IProcessesListSqlLiteService processesListService, IProcessesOperationsService processesOperationsService) {
+        public FocusHostService(IProcessesListSqlLiteService processesListService, IProcessesOperationsService processesOperationsService, ILocationsOperationsService locationsOperationsService) {
             this.processesListService = processesListService;
             this.processesOperationsService = processesOperationsService;
+            this.locationsOperationsService = locationsOperationsService;
 
             this.InitializeComponent();
         }
@@ -26,8 +32,15 @@ namespace FocusWindowsService {
             //Debugger.Launch();
 
             this.StartHostingWcfService(this.processesOperationsService);
-
+            this.StartWatchingLocations();
             this.StartWatcherTimer();
+        }
+
+        private void StartWatchingLocations() {
+            var allLocations = this.locationsOperationsService.GetAllWatchedLocations();
+            foreach (var watchedLocationDto in allLocations) {
+                FilesWatcherHelper.StartFilesWatcher(watchedLocationDto);
+            }
         }
 
         private void StartHostingWcfService(object operationsService) {

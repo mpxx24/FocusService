@@ -7,7 +7,8 @@ using NLog;
 
 namespace FocusWindowsService {
     internal static class Program {
-        private static ILogger logger = LogManager.GetCurrentClassLogger();
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         ///     The main entry point for the application.
         /// </summary>
@@ -19,9 +20,10 @@ namespace FocusWindowsService {
 
                 var processesListSqlLiteService = IoC.Resolve<IProcessesListSqlLiteService>();
                 var processesOperationsService = IoC.Resolve<IProcessesOperationsService>();
+                var locationsOperationsService = IoC.Resolve<ILocationsOperationsService>();
 
                 var servicesToRun = new ServiceBase[] {
-                    new FocusHostService(processesListSqlLiteService, processesOperationsService)
+                    new FocusHostService(processesListSqlLiteService, processesOperationsService, locationsOperationsService)
                 };
                 ServiceBase.Run(servicesToRun);
             }

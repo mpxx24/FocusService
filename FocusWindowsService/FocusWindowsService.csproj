@@ -84,8 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FilesHelpers\FilesWatcherService.cs" />
-    <Compile Include="FilesHelpers\IFilesWatcherService.cs" />
+    <Compile Include="FilesHelpers\FilesWatcherHelper.cs" />
     <Compile Include="ServiceModule.cs" />
     <Compile Include="FocusHostService.cs">
       <SubType>Component</SubType>

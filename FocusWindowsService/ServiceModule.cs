@@ -18,6 +18,7 @@ namespace FocusWindowsService {
             builder.RegisterType<Repository<WatchedLocation>>().As<IRepository<WatchedLocation>>();
             builder.RegisterType<ProcessesListSqlLiteService>().As<IProcessesListSqlLiteService>();
             builder.RegisterType<OperationsService>().As<IProcessesOperationsService>();
+            builder.RegisterType<OperationsService>().As<ILocationsOperationsService>();
             builder.RegisterType<LocationsListSqlLiteService>().As<ILocationsListSqlLiteService>();
         }
     }
