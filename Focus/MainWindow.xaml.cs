@@ -170,7 +170,7 @@ namespace Focus {
                 return this.GetWatchedProcesses();
             }
             catch (EndpointNotFoundException) {
-                MessageBox.Show($"Could not get watched processes list. Windows service 'FocusHostService' is most likely not running.");
+                MessageBox.Show("Could not get watched processes list. Windows service 'FocusHostService' is most likely not running.");
             }
             return new List<WatchedProcessModel>();
         }
@@ -225,7 +225,7 @@ namespace Focus {
                 return this.GetWatchedLocations();
             }
             catch (EndpointNotFoundException) {
-                MessageBox.Show($"Could not get watched locations list. Windows service 'FocusHostService' is most likely not running.");
+                MessageBox.Show("Could not get watched locations list. Windows service 'FocusHostService' is most likely not running.");
             }
             return new List<WatchedLocationModel>();
         }

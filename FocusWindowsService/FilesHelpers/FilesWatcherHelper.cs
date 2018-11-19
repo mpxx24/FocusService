@@ -13,14 +13,15 @@ namespace FocusWindowsService.FilesHelpers {
             var watcher = new FileSystemWatcher();
             watcher.Path = locationToWatch.LocationPath;
             watcher.Created += (sender, e) => OnFileCreated(sender, e, locationToWatch.ActionType);
-            watcher.Filter = locationToWatch.FileName;
+
+            watcher.Filter = $"{Path.GetFileNameWithoutExtension(locationToWatch.FileName)}*";
             watcher.EnableRaisingEvents = true;
         }
 
         private static void OnFileCreated(object sender, FileSystemEventArgs e, WatchedLocationActionType actionType) {
             try {
                 //TODO: fix this
-                //NOTE: this will not work when downloading the same file right after it was deleted
+                //NOTE: this (sometimes) will not work when downloading the same file right after it was deleted
                 //at least for ~70MB file
                 //File.Delete() sadly just marks file to be deleted and calling File.Exists() right after File.Delete() will return true (at least when e.g. downloading file in the browser)
                 if (!File.Exists(e.FullPath)) {

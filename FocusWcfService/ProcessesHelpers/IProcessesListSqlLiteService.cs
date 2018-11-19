@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using FocusWcfService.Dtos;
-using FocusWcfService.Models;
 
 namespace FocusWcfService.ProcessesHelpers {
     public interface IProcessesListSqlLiteService {

@@ -1,7 +1,5 @@
-﻿using System.IO;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using System.ServiceProcess;
-using System.Threading.Tasks;
 using System.Timers;
 using FocusWcfService;
 using FocusWcfService.ProcessesHelpers;

@@ -30,7 +30,7 @@ namespace FocusWcfService.LocationsHelpers {
                 this.repository.Save(watchedLocation);
             }
             catch (Exception e) {
-                this.logger.Debug(e, $"Failed to add new watched location! Path {locationPath} - file name {fileName}.");
+                this.logger.Debug($"Failed to add new watched location! Path {locationPath} - file name {fileName}. {e}");
                 throw;
             }
         }
@@ -46,7 +46,7 @@ namespace FocusWcfService.LocationsHelpers {
                 this.repository.Delete(watchedLocation);
             }
             catch (Exception e) {
-                this.logger.Debug(e, $"Failed to remove watched location! Path {locationPath} - file name {fileName}.");
+                this.logger.Debug($"Failed to remove watched location! Path {locationPath} - file name {fileName}. {e}");
                 throw;
             }
         }
