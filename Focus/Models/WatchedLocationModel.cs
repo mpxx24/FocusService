@@ -1,4 +1,4 @@
-﻿namespace Focus {
+﻿namespace Focus.Models {
     public class WatchedLocationModel {
         public string Location { get; set; }
         public string FileName { get; set; }

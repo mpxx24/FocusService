@@ -13,10 +13,10 @@ namespace FocusWindowsService {
         ///     The main entry point for the application.
         /// </summary>
         private static void Main() {
-            //Debugger.Launch();
             try {
-                logger.Debug("Initializing container!");
+                logger.Debug("Initializing container.");
                 IoC.Initialize(new Module[] { new ServiceModule() });
+                logger.Debug("Container succesfully initialized.");
 
                 var processesListSqlLiteService = IoC.Resolve<IProcessesListSqlLiteService>();
                 var processesOperationsService = IoC.Resolve<IProcessesOperationsService>();

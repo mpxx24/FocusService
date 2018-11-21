@@ -12,13 +12,13 @@ namespace FocusWindowsService.FilesHelpers {
         public static void StartFilesWatcher(WatchedLocationDto locationToWatch) {
             var watcher = new FileSystemWatcher();
             watcher.Path = locationToWatch.LocationPath;
-            watcher.Created += (sender, e) => OnFileCreated(sender, e, locationToWatch.ActionType);
+            watcher.Created += (sender, e) => OnFileCreated(e, locationToWatch.ActionType);
 
             watcher.Filter = $"{Path.GetFileNameWithoutExtension(locationToWatch.FileName)}*";
             watcher.EnableRaisingEvents = true;
         }
 
-        private static void OnFileCreated(object sender, FileSystemEventArgs e, WatchedLocationActionType actionType) {
+        private static void OnFileCreated(FileSystemEventArgs e, WatchedLocationActionType actionType) {
             try {
                 //TODO: fix this
                 //NOTE: this (sometimes) will not work when downloading the same file right after it was deleted
@@ -28,7 +28,7 @@ namespace FocusWindowsService.FilesHelpers {
                     //HACKS, ALL THE WAY
                     logger.Debug($"Waiting for file {e.FullPath} to be creeated!");
                     Thread.Sleep(1000);
-                    OnFileCreated(sender, e, actionType);
+                    OnFileCreated(e, actionType);
                 }
 
                 switch (actionType) {

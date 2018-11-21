@@ -4,9 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using System.Windows;
+using Focus.Core.CommonHelpers;
 using Focus.Core.LocationsHelpers;
 using Focus.FocusProcessesService;
-using Focus.Helpers;
+using Focus.Models;
 using Focus.Views;
 
 namespace Focus {

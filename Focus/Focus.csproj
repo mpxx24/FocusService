@@ -62,15 +62,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="LocationsHelpers\WatchedLocationActionType.cs" />
     <Compile Include="Views\AllowedTimeDialog.xaml.cs">
       <DependentUpon>AllowedTimeDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WatchedLocationDialog.xaml.cs">
       <DependentUpon>WatchedLocationDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WatchedLocationModel.cs" />
-    <Compile Include="WatchedProcessModel.cs" />
+    <Compile Include="Models\WatchedLocationModel.cs" />
+    <Compile Include="Models\WatchedProcessModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -99,7 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Processes.cs" />
-    <Compile Include="ProcessModel.cs" />
+    <Compile Include="Models\ProcessModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

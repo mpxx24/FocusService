@@ -83,10 +83,6 @@ namespace FocusWcfService.ProcessesHelpers {
         }
 
         public void UpdateTimeForWatchedProcess(string processName) {
-            if (!ProcessesHelper.IsProcessRunning(processName)) {
-                return;
-            }
-
             var process = this.repository.Filter<WatchedProcess>(x => x.Name == processName).FirstOrDefault();
 
             if (process == null) {
@@ -98,6 +94,10 @@ namespace FocusWcfService.ProcessesHelpers {
                 process.TimeLeft = process.TimeAllowedPerDay;
                 this.repository.Update(process);
                 this.logger.Debug($"Updated watched process '{process.Name}' - last watched: {process.LastWatchedDate}, time left: {process.TimeLeft}");
+                return;
+            }
+
+            if (!ProcessesHelper.IsProcessRunning(processName)) {
                 return;
             }
 

@@ -27,8 +27,6 @@ namespace FocusWindowsService {
         }
 
         protected override void OnStart(string[] args) {
-            //Debugger.Launch();
-
             this.StartHostingWcfService(this.processesOperationsService);
             this.StartWatchingLocations();
             this.StartWatcherTimer();

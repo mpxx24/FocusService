@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
+using Focus.Models;
 
 namespace Focus {
     public class Processes : ObservableCollection<ProcessModel> {

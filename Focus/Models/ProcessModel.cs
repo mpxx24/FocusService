@@ -1,4 +1,4 @@
-﻿namespace Focus {
+﻿namespace Focus.Models {
     public class ProcessModel {
         private int id { get; set; }
 

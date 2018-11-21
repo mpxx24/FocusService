@@ -25,7 +25,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" VerticalAlignment="Center" Width="250" x:Name="SearchTextBox" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="12,14,13,14"/>
-                    <Button Content="Search" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="22" Name="SearchButton" Click="SearchButton_OnClick" Grid.Column="2" Grid.Row="0" Margin="0,14"/>
+                    <Button Content="Search" IsDefault="True" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="22" Name="SearchButton" Click="SearchButton_OnClick" Grid.Column="2" Grid.Row="0" Margin="0,14"/>
 
                     <ListView HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="772" Name="ProcessesListView" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding listViewSource}" Grid.Row="1" Grid.ColumnSpan="5" Grid.Column="0" Grid.RowSpan="2">
                         <ListView.View>
@@ -73,7 +73,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" VerticalAlignment="Center" Width="250" x:Name="SearchWatchedTextBox" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Margin="11,14,18,14"/>
-                    <Button Content="Search" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="22" Name="SearchWatchedButton" Click="SearchButton_OnClick" Grid.Column="3" Grid.Row="0" Margin="0,14"/>
+                    <Button Content="Search" IsDefault="True" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="22" Name="SearchWatchedButton" Click="SearchButton_OnClick" Grid.Column="3" Grid.Row="0" Margin="0,14"/>
 
                     <ListView HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="772" Name="ProcessesWatchedListView" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding listViewWatchedSource}" Grid.Row="1" Grid.ColumnSpan="6" Grid.Column="0" Grid.RowSpan="2">
                         <ListView.View>
@@ -131,7 +131,7 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBox HorizontalAlignment="Center" Height="22" TextWrapping="Wrap" VerticalAlignment="Center" Width="250" x:Name="SearchWatchedLocationsTextBox" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" Margin="11,14,18,14"/>
-                    <Button Content="Search" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="22" Name="SearchWatchedLocationButton" Click="SearchButton_OnClick" Grid.Column="4" Grid.Row="0" Margin="0,14"/>
+                    <Button Content="Search" IsDefault="True" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Height="22" Name="SearchWatchedLocationButton" Click="SearchButton_OnClick" Grid.Column="4" Grid.Row="0" Margin="0,14"/>
 
                     <ListView HorizontalAlignment="Left" Height="291" VerticalAlignment="Top" Width="772" Name="LocationsWatchedListView" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding listViewWatchedSource}" Grid.Row="1" Grid.ColumnSpan="7" Grid.Column="0" Grid.RowSpan="2">
                         <ListView.View>

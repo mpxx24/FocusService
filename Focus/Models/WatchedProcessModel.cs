@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Focus {
+namespace Focus.Models {
     public class WatchedProcessModel {
         private readonly TimeSpan maxTimeSpan = new TimeSpan(24, 0, 0);
 
