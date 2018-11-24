@@ -1,9 +1,9 @@
 ﻿using Autofac;
 using FocusWcfService;
 using FocusWcfService.Common;
-using FocusWcfService.LocationsHelpers;
 using FocusWcfService.Models;
-using FocusWcfService.ProcessesHelpers;
+using FocusWcfService.Services.Locations;
+using FocusWcfService.Services.Processes;
 using NHibernate;
 
 namespace FocusWindowsService {

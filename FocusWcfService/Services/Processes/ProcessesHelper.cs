@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
-namespace FocusWcfService.ProcessesHelpers {
+namespace FocusWcfService.Services.Processes {
     public static class ProcessesHelper {
         public static bool KillProcess(string name) {
             try {

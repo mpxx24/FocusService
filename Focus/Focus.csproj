@@ -97,7 +97,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Processes.cs" />
     <Compile Include="Models\ProcessModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

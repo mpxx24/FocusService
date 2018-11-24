@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using FocusWcfService.Dtos;
 
-namespace FocusWcfService.ProcessesHelpers {
+namespace FocusWcfService.Services.Processes {
     public interface IProcessesListSqlLiteService {
         WatchedProcessDto GetProcess(string name);
         IEnumerable<WatchedProcessDto> GetAllWatchedProcesses();

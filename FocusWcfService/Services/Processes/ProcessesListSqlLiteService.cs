@@ -7,7 +7,7 @@ using FocusWcfService.Dtos;
 using FocusWcfService.Models;
 using NLog;
 
-namespace FocusWcfService.ProcessesHelpers {
+namespace FocusWcfService.Services.Processes {
     public class ProcessesListSqlLiteService : IProcessesListSqlLiteService {
         private readonly IRepository<WatchedProcess> repository;
 
@@ -36,6 +36,7 @@ namespace FocusWcfService.ProcessesHelpers {
             var isProcessAlreadyWatched = this.IsProcessWithTheSameNameAlreadyWatched(processName);
 
             if (isProcessAlreadyWatched.HasValue && isProcessAlreadyWatched.Value) {
+                this.logger.Debug($"Process named {processName} was already watched! Updating it.");
                 this.ChangeAllowedTimeForWatchedProcess(processName, allowedTime);
                 return;
             }
@@ -49,6 +50,7 @@ namespace FocusWcfService.ProcessesHelpers {
             };
 
             this.repository.Save(process);
+            this.logger.Debug($"Added new watched process {process.Name} - {process.TimeAllowedPerDay}");
         }
 
         public void RemoveWatchedProcess(string processName) {
@@ -57,8 +59,8 @@ namespace FocusWcfService.ProcessesHelpers {
             if (process == null) {
                 throw new InvalidDataException("Process does not exist in the database!");
             }
-
             this.repository.Delete(process);
+            this.logger.Debug($"Removed process {processName} from watched proceses!");
         }
 
         public bool? IsProcessWithTheSameNameAlreadyWatched(string processName) {
@@ -93,7 +95,7 @@ namespace FocusWcfService.ProcessesHelpers {
                 process.LastWatchedDate = DateTime.Now.Date;
                 process.TimeLeft = process.TimeAllowedPerDay;
                 this.repository.Update(process);
-                this.logger.Debug($"Updated watched process '{process.Name}' - last watched: {process.LastWatchedDate}, time left: {process.TimeLeft}");
+                this.logger.Debug($"Updated watched process '{process.Name}' - last watched: {process.LastWatchedDate.ToShortDateString()}, time left: {process.TimeLeft}");
                 return;
             }
 
@@ -111,7 +113,7 @@ namespace FocusWcfService.ProcessesHelpers {
             else {
                 this.repository.Update(process);
             }
-            this.logger.Debug($"Updated watched process '{process.Name}' - last watched: {process.LastWatchedDate}, time left: {process.TimeLeft}");
+            this.logger.Debug($"Updated watched process '{process.Name}' - last watched: {process.LastWatchedDate.ToShortDateString()}, time left: {process.TimeLeft}");
         }
 
         private WatchedProcess GetWatchedProcess(string name) {

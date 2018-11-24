@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Focus.Core.LocationsHelpers;
 using FocusWcfService.Dtos;
-using FocusWcfService.LocationsHelpers;
-using FocusWcfService.ProcessesHelpers;
+using FocusWcfService.Services.Locations;
+using FocusWcfService.Services.Processes;
 
 namespace FocusWcfService {
     public class OperationsService : IProcessesOperationsService, ILocationsOperationsService {

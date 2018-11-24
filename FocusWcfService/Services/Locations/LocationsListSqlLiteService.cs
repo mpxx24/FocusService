@@ -8,7 +8,7 @@ using FocusWcfService.Dtos;
 using FocusWcfService.Models;
 using NLog;
 
-namespace FocusWcfService.LocationsHelpers {
+namespace FocusWcfService.Services.Locations {
     public class LocationsListSqlLiteService : ILocationsListSqlLiteService {
         private readonly ILogger logger = LogManager.GetCurrentClassLogger();
 

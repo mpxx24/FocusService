@@ -14,6 +14,7 @@ namespace FocusWcfService.Common {
         }
 
         public void Delete(T obj) {
+            this.session.Clear();
             using (var transaction = this.session.BeginTransaction(IsolationLevel.Serializable)) {
                 this.session.Delete(obj);
                 transaction.Commit();
@@ -25,6 +26,7 @@ namespace FocusWcfService.Common {
 
         public IQueryable<T> Filter<T>(Expression<Func<T, bool>> func) where T : class {
             IQueryable<T> filteredItems;
+            this.session.Clear();
             using (var transaction = this.session.BeginTransaction(IsolationLevel.Serializable)) {
                 filteredItems = this.session.Query<T>().Where(func);
                 transaction.Commit();
@@ -35,6 +37,7 @@ namespace FocusWcfService.Common {
 
         public T Get(string name) {
             T result;
+            this.session.Clear();
             using (var transaction = this.session.BeginTransaction(IsolationLevel.Serializable)) {
                 result = this.session.Get<T>(name);
                 transaction.Commit();
@@ -44,6 +47,7 @@ namespace FocusWcfService.Common {
 
         public IEnumerable<T> GetAll() {
             IEnumerable<T> allItems;
+            this.session.Clear();
             using (var transaction = this.session.BeginTransaction(IsolationLevel.Serializable)) {
                 allItems = this.session.Query<T>().ToList();
                 transaction.Commit();
@@ -52,6 +56,7 @@ namespace FocusWcfService.Common {
         }
 
         public void Save(T obj) {
+            this.session.Clear();
             using (var transaction = this.session.BeginTransaction(IsolationLevel.Serializable)) {
                 this.session.Save(obj);
                 transaction.Commit();
@@ -59,6 +64,7 @@ namespace FocusWcfService.Common {
         }
 
         public void Update(T obj) {
+            this.session.Clear();
             using (var transaction = this.session.BeginTransaction(IsolationLevel.Serializable)) {
                 this.session.Update(obj);
                 transaction.Commit();

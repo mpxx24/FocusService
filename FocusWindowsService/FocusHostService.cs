@@ -2,7 +2,7 @@
 using System.ServiceProcess;
 using System.Timers;
 using FocusWcfService;
-using FocusWcfService.ProcessesHelpers;
+using FocusWcfService.Services.Processes;
 using FocusWindowsService.FilesHelpers;
 using NLog;
 

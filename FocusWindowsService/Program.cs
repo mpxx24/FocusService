@@ -2,7 +2,7 @@
 using System.ServiceProcess;
 using Autofac;
 using FocusWcfService;
-using FocusWcfService.ProcessesHelpers;
+using FocusWcfService.Services.Processes;
 using NLog;
 
 namespace FocusWindowsService {
