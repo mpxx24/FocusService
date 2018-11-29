@@ -14,7 +14,6 @@ namespace FocusWcfService.Common {
         }
 
         public void Delete(T obj) {
-            this.session.Clear();
             using (var transaction = this.session.BeginTransaction(IsolationLevel.Serializable)) {
                 this.session.Delete(obj);
                 transaction.Commit();
@@ -56,7 +55,6 @@ namespace FocusWcfService.Common {
         }
 
         public void Save(T obj) {
-            this.session.Clear();
             using (var transaction = this.session.BeginTransaction(IsolationLevel.Serializable)) {
                 this.session.Save(obj);
                 transaction.Commit();
@@ -64,7 +62,6 @@ namespace FocusWcfService.Common {
         }
 
         public void Update(T obj) {
-            this.session.Clear();
             using (var transaction = this.session.BeginTransaction(IsolationLevel.Serializable)) {
                 this.session.Update(obj);
                 transaction.Commit();

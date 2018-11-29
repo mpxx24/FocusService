@@ -24,9 +24,9 @@ namespace FocusWcfService.Services.Processes {
 
         public IEnumerable<WatchedProcessDto> GetAllWatchedProcesses() {
             var watchedProcesses = this.repository.GetAll().ToList();
-            this.logger.Debug($"Found {watchedProcesses.Count} watched process(es)");
+            this.logger.Debug($"Found {watchedProcesses.Count} watched process(es).");
             watchedProcesses.ForEach(x => {
-                                         this.logger.Debug($"\t{x.Name} - {x.TimeAllowedPerDay} - {x.TimeLeft}");
+                                         this.logger.Debug($"\t'{x.Name}' - {x.TimeAllowedPerDay} - {x.TimeLeft}");
                                      });
 
             return this.MapWatchedProcessToDtos(watchedProcesses);
@@ -36,7 +36,7 @@ namespace FocusWcfService.Services.Processes {
             var isProcessAlreadyWatched = this.IsProcessWithTheSameNameAlreadyWatched(processName);
 
             if (isProcessAlreadyWatched.HasValue && isProcessAlreadyWatched.Value) {
-                this.logger.Debug($"Process named {processName} was already watched! Updating it.");
+                this.logger.Debug($"Process named '{processName}' was already watched! Updating it.");
                 this.ChangeAllowedTimeForWatchedProcess(processName, allowedTime);
                 return;
             }
@@ -50,7 +50,7 @@ namespace FocusWcfService.Services.Processes {
             };
 
             this.repository.Save(process);
-            this.logger.Debug($"Added new watched process {process.Name} - {process.TimeAllowedPerDay}");
+            this.logger.Debug($"Added new watched process '{process.Name}' - {process.TimeAllowedPerDay}.");
         }
 
         public void RemoveWatchedProcess(string processName) {
@@ -60,7 +60,7 @@ namespace FocusWcfService.Services.Processes {
                 throw new InvalidDataException("Process does not exist in the database!");
             }
             this.repository.Delete(process);
-            this.logger.Debug($"Removed process {processName} from watched proceses!");
+            this.logger.Debug($"Removed process '{processName}' from watched proceses!");
         }
 
         public bool? IsProcessWithTheSameNameAlreadyWatched(string processName) {
@@ -78,7 +78,7 @@ namespace FocusWcfService.Services.Processes {
             if (process == null) {
                 throw new InvalidDataException("Process does not exist in the database!");
             }
-
+            this.logger.Debug($"Changing allowed time for process '{process.Name}' from {process.TimeAllowedPerDay} to {allowedTime}.");
             process.TimeAllowedPerDay = allowedTime;
             process.TimeLeft = allowedTime;
             this.repository.Update(process);
@@ -95,7 +95,7 @@ namespace FocusWcfService.Services.Processes {
                 process.LastWatchedDate = DateTime.Now.Date;
                 process.TimeLeft = process.TimeAllowedPerDay;
                 this.repository.Update(process);
-                this.logger.Debug($"Updated watched process '{process.Name}' - last watched: {process.LastWatchedDate.ToShortDateString()}, time left: {process.TimeLeft}");
+                this.logger.Debug($"Updated watched process '{process.Name}' - last watched: {process.LastWatchedDate.ToShortDateString()}, time left: {process.TimeLeft}.");
                 return;
             }
 
@@ -108,12 +108,12 @@ namespace FocusWcfService.Services.Processes {
                 ProcessesHelper.KillProcess(process.Name);
                 process.TimeLeft = new TimeSpan();
                 this.repository.Update(process);
-                this.logger.Debug($"Killed process '{process.Name}'");
+                this.logger.Debug($"Killed process '{process.Name}'.");
             }
             else {
                 this.repository.Update(process);
             }
-            this.logger.Debug($"Updated watched process '{process.Name}' - last watched: {process.LastWatchedDate.ToShortDateString()}, time left: {process.TimeLeft}");
+            this.logger.Debug($"Updated watched process '{process.Name}' - last watched: {process.LastWatchedDate.ToShortDateString()}, time left: {process.TimeLeft}.");
         }
 
         private WatchedProcess GetWatchedProcess(string name) {

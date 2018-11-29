@@ -30,7 +30,7 @@ namespace FocusWcfService.Services.Locations {
                 this.repository.Save(watchedLocation);
             }
             catch (Exception e) {
-                this.logger.Debug($"Failed to add new watched location! Path {locationPath} - file name {fileName}. {e}");
+                this.logger.Debug($"Failed to add new watched location! Path '{locationPath}' - file name {fileName}. {e}");
                 throw;
             }
         }
@@ -40,22 +40,22 @@ namespace FocusWcfService.Services.Locations {
                 var watchedLocation = this.repository.Filter<WatchedLocation>(x => x.Path == locationPath && x.FileName == fileName).FirstOrDefault();
 
                 if (watchedLocation == null) {
-                    throw new ObjectNotFoundException($"Could not find watched location with location path {locationPath} and file name {fileName}.");
+                    throw new ObjectNotFoundException($"Could not find watched location with location path '{locationPath}' and file name '{fileName}'.");
                 }
 
                 this.repository.Delete(watchedLocation);
             }
             catch (Exception e) {
-                this.logger.Debug($"Failed to remove watched location! Path {locationPath} - file name {fileName}. {e}");
+                this.logger.Debug($"Failed to remove watched location! Path '{locationPath}' - file name '{fileName}'. {e}");
                 throw;
             }
         }
 
         public IEnumerable<WatchedLocationDto> GetAllWatchedLocations() {
             var watchedLocations = this.repository.GetAll().ToList();
-            this.logger.Debug($"Found {watchedLocations.Count} watched location(s)");
+            this.logger.Debug($"Found {watchedLocations.Count} watched location(s).");
             watchedLocations.ForEach(x => {
-                                         this.logger.Debug($"\t{x.Path} - {x.FileName} - {x.ActionType}");
+                                         this.logger.Debug($"\t'{x.Path}' - '{x.FileName}' - {x.ActionType}");
                                      });
 
             return this.MapWatchedLocationsToDtos(watchedLocations);
