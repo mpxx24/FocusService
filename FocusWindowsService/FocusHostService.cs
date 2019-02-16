@@ -24,6 +24,7 @@ namespace FocusWindowsService {
             this.locationsOperationsService = locationsOperationsService;
 
             this.InitializeComponent();
+            this.CanStop = false;
         }
 
         protected override void OnStart(string[] args) {
